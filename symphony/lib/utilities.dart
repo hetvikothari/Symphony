@@ -1,24 +1,15 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget getTextWid(String txt, {String val = 'inactive'}){
-  return Text(
-    txt,
-    style: TextStyle(
-      fontFamily: 'Segoe-UI',
-      fontSize: 18.5,
-      color: (val == 'active') ? Colors.black : Colors.grey,
-      fontWeight: FontWeight.bold,
-      decoration: (val == 'active') ? TextDecoration.underline : TextDecoration.none,
-      decorationColor: Colors.blue,
-      decorationThickness: 5,
-      letterSpacing: 2.0,
-    ),
+Widget getPosterWithoutText(String imgPath){
+  return Container(
+    height: 205,
+    width: 165,
+    child: Image.asset(imgPath),
   );
 }
 
-Widget getSongPoster(String ImagePath, String SongName){
+Widget getPoster(String imgPath, String songName, double sz){
   return Container(
     height: 225,
     width: 180,
@@ -31,13 +22,13 @@ Widget getSongPoster(String ImagePath, String SongName){
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Image.asset(
-          ImagePath,
+          imgPath,
           height: 180,
         ),
         Text(
-          SongName,
+          songName,
           style: TextStyle(
-              fontSize: 18,
+              fontSize: sz,
               color: Colors.black,
               fontFamily: 'Nirmala',
           ),
@@ -134,4 +125,37 @@ List<BottomNavigationBarItem> bottomnavbar(){
       label: 'Account',
     )
   ];
+}
+
+Widget getArtistPoster(String imgPath, String artistName){
+  return Column(
+      children: [
+        CircleAvatar(
+          radius: 80,
+          backgroundImage: AssetImage(imgPath),
+          // child: Text(artistName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.end,),
+        ),
+        Text(
+            artistName,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontFamily: 'Segoe-UI'
+            ),
+        ),
+      ]
+  );
+}
+
+Text getHeading(String name){
+  return Text(
+    name,
+    style: TextStyle(
+      fontSize: 20,
+      color: Colors.black,
+      fontFamily: 'Segoe',
+      letterSpacing: 2.5,
+      fontWeight: FontWeight.bold,
+    ),
+  );
 }
