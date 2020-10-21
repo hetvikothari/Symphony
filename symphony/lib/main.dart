@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignupPage(),
+        '/homepage': (context) => MyHomePage(),
       },
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

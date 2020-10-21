@@ -24,17 +24,17 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: Stack(
+                padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                      child: Text('Hi',
-                          style: TextStyle(fontSize: 150.0, fontWeight: FontWeight.bold, color: Colors.black)),
+                    GestureDetector(
+                      onTap: (){ pushtonavigator('/homepage'); },
+                      child: Text('Skip this', style: TextStyle(color: Colors.black, fontSize: 20, decoration: TextDecoration.underline,), textAlign: TextAlign.right,),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(16.0, 130.0, 0.0, 0.0),
-                      child: Text('There.',
-                          style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold, color: Colors.black)),
+                      child: Text('Hi There.',
+                          style: TextStyle(fontSize: 100.0, fontWeight: FontWeight.bold, color: Colors.black)),
                     ),
                   ],
                 ),
