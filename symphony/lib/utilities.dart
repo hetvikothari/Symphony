@@ -159,3 +159,44 @@ Text getHeading(String name){
     ),
   );
 }
+
+Widget roundbutton(String lbl, Color textcolor, Color buttoncolor, Color shadowcolor, Function func, {dynamic param}){
+  return Container(
+      height: 40.0,
+      child: Material(
+        borderRadius: BorderRadius.circular(20.0),
+        shadowColor: shadowcolor,
+        color: buttoncolor,
+        elevation: 7.0,
+        child: GestureDetector(
+          onTap: () {
+            func(param);
+          },
+          child: Center(
+            child: Text(
+              lbl,
+              style: TextStyle(
+                  color: textcolor,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat'),
+            ),
+          ),
+        ),
+      )
+  );
+}
+
+Widget textfield(IconData i, String hnt, String lbl){
+  return TextFormField(
+    decoration: InputDecoration(
+      icon: Icon(i),
+      hintText: hnt,
+      labelText: lbl,
+      labelStyle: TextStyle(
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+          color: Colors.grey
+      ),
+    ),
+  );
+}
