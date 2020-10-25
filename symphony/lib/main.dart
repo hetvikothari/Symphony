@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'HomePage.dart';
 import 'login.dart';
 import 'signup.dart';
+import 'playlist.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignupPage(),
         '/homepage': (context) => MyHomePage(),
+        '/playlist': (context) => MyPlaylist(),
       },
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

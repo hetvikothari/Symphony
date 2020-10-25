@@ -39,11 +39,22 @@ Widget getPoster(String imgPath, String songName, double sz){
   );
 }
 
-Widget getPlayListItem(String playlistName, String playlistDesc){
+Widget getPlayListItem(String playlistName, String playlistDesc, String imgname){
+  String imagelocation = 'assets/' + imgname;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Icon(Icons.adjust, size: 50, color: Colors.blue[900],),
+      /*Icon(Icons.adjust, size: 50, color: Colors.blue[900],),*/
+      Container(
+              width: 55.0,
+              height: 55.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image:  AssetImage(imagelocation),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
       Column(
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -68,6 +79,7 @@ Widget getPlayListItem(String playlistName, String playlistDesc){
         ],
       ),
       Icon(Icons.favorite_border,size: 40,),
+      Icon(Icons.more_vert,size: 40,),
     ],
   );
 }
@@ -109,6 +121,7 @@ List<BottomNavigationBarItem> bottomnavbar(){
       label: 'Home',
     ),
     BottomNavigationBarItem(
+      
       icon: Icon(Icons.playlist_add_outlined),
       label: 'Playlist',
     ),

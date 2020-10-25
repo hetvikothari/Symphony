@@ -34,6 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void pushtonavigator(String routename) {
+    Navigator.of(context).pushNamed(routename);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
+                    GestureDetector(
+                      onTap: (){ pushtonavigator('/playlist'); },
+                      child: Text('View Playlist', style: TextStyle(color: Colors.black, fontSize: 20, decoration: TextDecoration.underline,), textAlign: TextAlign.right,),
+                    ),
+              SizedBox(height: 30,),     
               Text(
                 'Browse',
                 style: TextStyle(
@@ -206,19 +215,19 @@ Widget getMOODlayout(){
             children: [
               Divider(color: Colors.black),
               SizedBox(height: 15),
-              getPlayListItem('Just Wanna Dance', 'Party Mood'),
+              getPlayListItem('Just Wanna Dance', 'Party Mood / 4:03 ','null.webp'),
               SizedBox(height: 15),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Love is in the Air', 'Romantic ones'),
+              getPlayListItem('Love is in the Air', 'Romantic ones / 3:33','null.webp'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Tute Dil ki Dastaan ', 'Sad wibes'),
+              getPlayListItem('Tute Dil ki Dastaan ', 'Sad wibes / 2:23','null.webp'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Navratri Specials', 'Garba songs'),
+              getPlayListItem('Navratri Specials', 'Garba songs / 3:21','null.webp'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
             ],
