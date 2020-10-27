@@ -81,13 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 30,),
               _activetab == 'MOODS' ? getMOODlayout() : (_activetab == 'ARTISTS' ? getARTISTlayout() : getPODCASTlayout())
             ],
-
           ),
         ),
-
       ),
-
-
     );
   }
 }
@@ -209,11 +205,11 @@ Widget getMOODlayout(){
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('All of me ', 'John Legend / 2:23','null.webp'),
+              getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
+              getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21', 'rangde.jpg'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
             ],

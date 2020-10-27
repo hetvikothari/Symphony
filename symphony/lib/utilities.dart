@@ -46,7 +46,6 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      /*Icon(Icons.adjust, size: 50, color: Colors.blue[900],),*/
       Container(
               width: 55.0,
               height: 55.0,
@@ -57,49 +56,39 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
                 ),
               ),
             ),
-      Column(
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            playlistName,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Calibri',
-              fontSize: 25,
+      Container(
+        width: 200,
+        child: Column(
+          children: [
+            Text(
+              playlistName,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
-          ),
-          Text(
-            playlistDesc,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Calibri',
-              fontSize: 15,
+            Text(
+              playlistDesc,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 15,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
-          ),
-        ],
-      ),
-      SizedBox(
-        width: 100,
-      ),
-      Align(
-        alignment: Alignment.centerRight,
-        child: LikeButton(
-          onTap: onLikeButtonTapped,
+          ],
         ),
       ),
-      Align(
-        alignment: Alignment.centerRight,
-        child: Icon(Icons.more_vert,size: 40,),
-      ),
+      LikeButton(onTap: onLikeButtonTapped),
+      Icon(Icons.more_vert,size: 40,),
     ],
   );
 }
 
 
 Future<bool> onLikeButtonTapped(bool isLiked) async{
-
   return !isLiked;
 }
 
@@ -131,9 +120,7 @@ Widget getNowPlaying(String playlistName, String playlistDesc, String imgname){
             ),
             textAlign: TextAlign.left,
           ),
-          SizedBox(
-            width: 20.0,
-          ),
+          SizedBox(width: 20.0),
           Text(
             playlistDesc,
             style: TextStyle(
@@ -155,7 +142,6 @@ Widget getNowPlaying(String playlistName, String playlistDesc, String imgname){
             color: Colors.blue[800]),
         child: new Icon(Icons.skip_next, size: 40,),
       ),
-
     ],
   );
 }
@@ -175,7 +161,6 @@ Widget getSearchBar(String hinttext){
         Icon(Icons.search),
         Expanded(
           child: TextField(
-            autofocus: true,
             decoration: InputDecoration(
               hintText: hinttext,
               focusedBorder: InputBorder.none,
@@ -197,7 +182,6 @@ List<BottomNavigationBarItem> bottomnavbar(){
       label: 'Home',
     ),
     BottomNavigationBarItem(
-      
       icon: Icon(Icons.playlist_add_outlined),
       label: 'Playlist',
     ),
@@ -222,7 +206,6 @@ Widget getArtistPoster(String imgPath, String artistName){
         CircleAvatar(
           radius: 80,
           backgroundImage: AssetImage(imgPath),
-          // child: Text(artistName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.end,),
         ),
         Text(
             artistName,
@@ -287,5 +270,50 @@ Widget textfield(IconData i, String hnt, String lbl){
           color: Colors.grey
       ),
     ),
+  );
+}
+
+Widget getPlayList(String playlistName, String playlistDesc){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Icon(Icons.adjust, size: 50, color: Colors.blue[900],),
+      Container(
+        width: 210,
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              playlistName,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              playlistDesc,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 15,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerRight,
+        child: LikeButton(
+          onTap: onLikeButtonTapped,
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerRight,
+        child: Icon(Icons.more_vert,size: 40,),
+      ),
+    ],
   );
 }

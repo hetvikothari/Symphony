@@ -41,9 +41,6 @@ class _MyPodcastState extends State<MyPodcast> {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30,),
-
-
-
             ],
           ),
         ),

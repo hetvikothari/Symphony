@@ -34,9 +34,6 @@ class _MyFavState extends State<MyFav> {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30,),
-
-
-
             ],
           ),
         ),

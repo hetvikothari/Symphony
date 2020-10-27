@@ -11,7 +11,7 @@ class MyPlaylist extends StatefulWidget{
 
 class _MyPlaylistState extends State<MyPlaylist> {
   int _selectedIndex = 0;
-  double _currentSliderValue = 20;
+  double _currentSliderValue = 1;
  
 @override
   Widget build(BuildContext context) {
@@ -37,58 +37,77 @@ class _MyPlaylistState extends State<MyPlaylist> {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30,),
-        Expanded(
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              Divider(color: Colors.black),
-              SizedBox(height: 15),
-              getPlayListItem('Agar tum ', 'Tamasha / 4:03','tamasha.jpg'),
-              SizedBox(height: 15),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Patakha Guddi', 'Highway / 3:09','highway.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Paathshala ', 'Rang De Basanti / 5:45','rangde.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Phir Ud chala', 'Rockstar / 4:25','rockstar.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15),
-              getPlayListItem('Matargashti', 'Tamasha / 4:03','tamasha.jpg'),
-              SizedBox(height: 15),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Wanna MashUp', 'Highway / 3:09','highway.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Luka CHupi', 'Rang De Basanti / 5:45','rangde.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Aur Ho', 'Rockstar / 4:25','rockstar.jpg'),
-              SizedBox(height: 15,),
-            ],
-          ),
-        ),
+            Expanded(
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15),
+                  getPlayList('Just Wanna Dance', 'Party Mood'),
+                  SizedBox(height: 15),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Love is in the Air', 'Romantic ones'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Navratri Specials', 'Garba songs'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15),
+                  getPlayList('Just Wanna Dance', 'Party Mood'),
+                  SizedBox(height: 15),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Love is in the Air', 'Romantic ones'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Navratri Specials', 'Garba songs'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                ],
+              ),
+            ),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
               getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg'),
             Slider(
-            value: _currentSliderValue,
-            min: 0,
-            max: 100,
-            divisions: 5,
-            label: _currentSliderValue.round().toString(),
-            onChanged: (double value) {
-              setState(() {
-                _currentSliderValue = value;
-              });
+              value: _currentSliderValue,
+              min: 0,
+              max: 60,
+              divisions: 60,
+              label: _currentSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _currentSliderValue = value;
+                });
             },
           )
               

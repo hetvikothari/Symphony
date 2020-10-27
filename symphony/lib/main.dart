@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
         textTheme: TextTheme(subtitle1: TextStyle(color: Colors.grey)),
       ),
       home:  Scaffold(
+        resizeToAvoidBottomInset: false,
         body: _children[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           iconSize: 40,

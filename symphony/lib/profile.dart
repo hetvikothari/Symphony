@@ -40,9 +40,6 @@ class _MyProfileState extends State<MyProfile> {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30,),
-
-
-
             ],
           ),
         ),
