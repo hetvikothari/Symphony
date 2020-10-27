@@ -53,12 +53,12 @@ class _LoginPageState extends State<LoginPage> {
                           onTap: (){},
                           child: Text(
                             'Forgot Password',
-                            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline),
+                            style: TextStyle(color: Colors.indigo[900], fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline),
                           ),
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      roundbutton('LOGIN', Colors.white, Colors.green, Colors.greenAccent, pushtonavigator, param: '/signup'),
+                      roundbutton('LOGIN', Colors.white, Colors.indigo[900], Colors.indigoAccent, pushtonavigator, param: '/signup'),
                       SizedBox(height: 20.0),
                     ],
                   )),
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Register',
-                      style: TextStyle(color: Colors.green, fontFamily: 'Montserrat', fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+                      style: TextStyle(color: Colors.indigo[900], fontFamily: 'Montserrat', fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
                     ),
                   )
                 ],

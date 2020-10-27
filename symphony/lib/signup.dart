@@ -49,7 +49,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(height: 20,),
                     textfield(Icons.vpn_key_sharp, "Enter your Password Again", "Confirm Password"),
                     SizedBox(height: 50),
-                    roundbutton('SIGN UP', Colors.white, Colors.green, Colors.greenAccent, null),
+                    roundbutton('SIGN UP', Colors.white, Colors.indigo[900], Colors.indigoAccent, null),
                     SizedBox(height: 20),
                     roundbutton('Go Back', Colors.black, Colors.white, Colors.white, popfromnavigator),
                   ],
