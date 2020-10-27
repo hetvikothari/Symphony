@@ -186,12 +186,12 @@ List<BottomNavigationBarItem> bottomnavbar(){
       label: 'Playlist',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.radio),
-      label: 'Podcast',
+      icon: Icon(Icons.music_note),
+      label: 'Now Playing',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.music_note),
-      label: 'Music',
+      icon: Icon(Icons.radio),
+      label: 'Podcasts',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.person),

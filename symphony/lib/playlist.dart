@@ -25,77 +25,40 @@ class _MyPlaylistState extends State<MyPlaylist> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
-              Text(
-                'Playlist',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontFamily: 'RockWell',
-                  fontSize: 45,
-                  color: Colors.black,
-                  letterSpacing: 3.0,
-                ),
-                textAlign: TextAlign.left,
-              ),
+              getHeading('My Playlists'),
               SizedBox(height: 30,),
             Expanded(
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15),
                   getPlayList('Just Wanna Dance', 'Party Mood'),
                   SizedBox(height: 15),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15,),
                   getPlayList('Love is in the Air', 'Romantic ones'),
                   SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15,),
                   getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
                   SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15,),
                   getPlayList('Navratri Specials', 'Garba songs'),
                   SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15),
                   getPlayList('Just Wanna Dance', 'Party Mood'),
                   SizedBox(height: 15),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                   SizedBox(height: 15,),
                   getPlayList('Love is in the Air', 'Romantic ones'),
                   SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  getPlayList('Navratri Specials', 'Garba songs'),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
+                  Divider(color: Colors.black),
                 ],
               ),
             ),
-              Divider(color: Colors.black),
               SizedBox(height: 15,),
               getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg'),
             Slider(
@@ -110,8 +73,6 @@ class _MyPlaylistState extends State<MyPlaylist> {
                 });
             },
           )
-              
-              
             ],
           ),
         ),

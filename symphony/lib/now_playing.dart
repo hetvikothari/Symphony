@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // void main() {
-//   runApp(MyApp());
+//   runAps nowPlaying());
 // }
-class MyApp extends StatelessWidget {
+class nowPlaying extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,21 +29,20 @@ class MyApp extends StatelessWidget {
                   child:ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
-                      "images/kas.jpg",
-                      height: 300,
+                      "assets/kas.jpg",
+                      height: 350,
                       fit: BoxFit.cover,
                       )
                     ),
                 ),
                   Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
                     child:Column(
                       children: [
                         Text("Kar Gayi Chull",
-                        style:TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                        style:TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
                         ),
-
-                        Text("Kapoor & Sons")],)
+                        Text("Kapoor & Sons", style: TextStyle(fontSize:20,),)],)
                   ),
                   Row(
                     children:[
@@ -62,25 +61,26 @@ class MyApp extends StatelessWidget {
                     ]
                   ),
 
-                  Row(
-
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.arrow_left,
-                        size:70
-                        ),
-                        SizedBox(width: 20,),
-                      Icon(
-                        Icons.pause_circle_outline,
-                        size: 60
-                        ),
-                        SizedBox(width: 20,),
-                      Icon(
-                        Icons.arrow_right,
-                        size: 70)
-                      ],)
-
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.arrow_left,
+                          size:70
+                          ),
+                          SizedBox(width: 20,),
+                        Icon(
+                          Icons.pause_circle_outline,
+                          size: 60
+                          ),
+                          SizedBox(width: 20,),
+                        Icon(
+                          Icons.arrow_right,
+                          size: 70)
+                        ],),
+                  )
               ],
             ),
           ),

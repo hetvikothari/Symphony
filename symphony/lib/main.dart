@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:symphony/now_playing.dart';
 
 import 'HomePage.dart';
 import 'login.dart';
@@ -23,14 +24,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
   final List<Widget> _children =
   [
     MyHomePage(),
     MyPlaylist(),
+    nowPlaying(),
     MyPodcast(),
-    MyFav(),
-    MyProfile(),
+    LoginPage()
   ];
 
   void _onItemTapped(int index){
