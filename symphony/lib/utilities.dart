@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
+
 
 Widget getPosterWithoutText(String imgPath){
   return Container(
@@ -78,8 +80,82 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
           ),
         ],
       ),
-      Icon(Icons.favorite_border,size: 40,),
-      Icon(Icons.more_vert,size: 40,),
+      SizedBox(
+        width: 100,
+      ),
+      Align(
+        alignment: Alignment.centerRight,
+        child: LikeButton(
+          onTap: onLikeButtonTapped,
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerRight,
+        child: Icon(Icons.more_vert,size: 40,),
+      ),
+    ],
+  );
+}
+
+
+Future<bool> onLikeButtonTapped(bool isLiked) async{
+
+  return !isLiked;
+}
+
+Widget getNowPlaying(String playlistName, String playlistDesc, String imgname){
+  String imagelocation = 'assets/' + imgname;
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      /*Icon(Icons.adjust, size: 50, color: Colors.blue[900],),*/
+      Container(
+        width: 55.0,
+        height: 55.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:  AssetImage(imagelocation),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+      Row(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            playlistName,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Calibri',
+              fontSize: 25,
+            ),
+            textAlign: TextAlign.left,
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          Text(
+            playlistDesc,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Calibri',
+              fontSize: 15,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
+      IconTheme(
+        data: new IconThemeData(
+            color: Colors.blue[800]),
+        child: new Icon(Icons.play_arrow, size: 50,),
+      ),
+      IconTheme(
+        data: new IconThemeData(
+            color: Colors.blue[800]),
+        child: new Icon(Icons.skip_next, size: 40,),
+      ),
+
     ],
   );
 }
@@ -127,7 +203,7 @@ List<BottomNavigationBarItem> bottomnavbar(){
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.radio),
-      label: 'FM Radio',
+      label: 'Podcast',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.music_note),

@@ -10,13 +10,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
   String _activetab = 'MOODS';
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  bool heart = false;
+
 
   Widget getTextWid(String txt){
     return Text(
@@ -50,11 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
-                    GestureDetector(
-                      onTap: (){ pushtonavigator('/playlist'); },
-                      child: Text('View Playlist', style: TextStyle(color: Colors.black, fontSize: 20, decoration: TextDecoration.underline,), textAlign: TextAlign.right,),
-                    ),
-              SizedBox(height: 30,),     
               Text(
                 'Browse',
                 style: TextStyle(
@@ -90,18 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 30,),
               _activetab == 'MOODS' ? getMOODlayout() : (_activetab == 'ARTISTS' ? getARTISTlayout() : getPODCASTlayout())
             ],
+
           ),
         ),
+
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 40,
-        backgroundColor: Colors.black12,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.blue[900],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: bottomnavbar(),
-      ),
+
+
     );
   }
 }
@@ -207,7 +193,7 @@ Widget getMOODlayout(){
           ),
         ),
         SizedBox(height:30),
-        getHeading('PLAYLISTS'),
+        getHeading('Most Played'),
         SizedBox(height:10,),
         Expanded(
           child: ListView(
@@ -215,19 +201,19 @@ Widget getMOODlayout(){
             children: [
               Divider(color: Colors.black),
               SizedBox(height: 15),
-              getPlayListItem('Just Wanna Dance', 'Party Mood / 4:03 ','null.webp'),
+              getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
               SizedBox(height: 15),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Love is in the Air', 'Romantic ones / 3:33','null.webp'),
+              getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Tute Dil ki Dastaan ', 'Sad wibes / 2:23','null.webp'),
+              getPlayListItem('All of me ', 'John Legend / 2:23','null.webp'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
               SizedBox(height: 15,),
-              getPlayListItem('Navratri Specials', 'Garba songs / 3:21','null.webp'),
+              getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
               SizedBox(height: 15,),
               Divider(color: Colors.black),
             ],
