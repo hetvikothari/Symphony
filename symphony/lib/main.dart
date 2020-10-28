@@ -2,16 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:symphony/now_playing.dart';
 
-import 'HomePage.dart';
 import 'login.dart';
 import 'signup.dart';
-import 'playlist.dart';
-import 'utilities.dart';
-import 'podcast.dart';
-import 'profile.dart';
-import 'fav.dart';
+import 'screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -24,43 +19,21 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  int _selectedIndex = 4;
-  final List<Widget> _children =
-  [
-    MyHomePage(),
-    MyPlaylist(),
-    nowPlaying(),
-    MyPodcast(),
-    LoginPage()
-  ];
-
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Music Player',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/signup': (context) => SignupPage(),
+        '/homepage': (context) => MyScreen(),
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(subtitle1: TextStyle(color: Colors.grey)),
-      ),
-      home:  Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: _children[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          iconSize: 40,
-          backgroundColor: Colors.black12,
-          unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.blue[900],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: bottomnavbar(),
-        ),
       ),
     );
   }

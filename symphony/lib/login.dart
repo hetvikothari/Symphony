@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'utilities.dart';
-import 'signup.dart';
-import 'package:symphony/HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,12 +11,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   void pushtonavigator(String routename) {
-    if(routename == '/signup'){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()),);
-    }
-    if(routename == '/homepage'){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()),);
-    }
+    Navigator.of(context).pushNamed(routename);
   }
 
   @override
@@ -80,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(width: 5.0),
                   GestureDetector(
                     onTap: () {
-                      pushtonavigator('/signup');
+                      Navigator.of(context).pushNamed('/signup');
                     },
                     child: Text(
                       'Register',

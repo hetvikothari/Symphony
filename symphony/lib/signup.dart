@@ -20,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
               Widget>[
             Container(
-              child: Stack(
+              child: Column(
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),

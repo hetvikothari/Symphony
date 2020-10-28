@@ -30,7 +30,7 @@ class _MyPodcastState extends State<MyPodcast> {
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
               Text(
-                'Podcast',
+                'Podcasts',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   fontFamily: 'RockWell',
@@ -40,8 +40,39 @@ class _MyPodcastState extends State<MyPodcast> {
                 ),
                 textAlign: TextAlign.left,
               ),
-              SizedBox(height: 30,),
+              SizedBox(height:20,),
+              getHeading('Crime'),
+              Flexible(
+                  child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        getPosterWithoutText('assets/murder.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/murder.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/murder.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/murder.jpg'),
+                      ]
+                  )
+              ),
+              getHeading('Science & Technology'),
+              Flexible(
+                  child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        getPosterWithoutText('assets/girl.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/girl.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/girl.jpg'),
+                        SizedBox(width:20),
+                        getPosterWithoutText('assets/girl.jpg'),
+                      ]
+                  )
+              ),
             ],
+
           ),
         ),
       ),

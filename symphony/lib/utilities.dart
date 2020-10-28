@@ -186,12 +186,12 @@ List<BottomNavigationBarItem> bottomnavbar(){
       label: 'Playlist',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.music_note),
-      label: 'Now Playing',
+      icon: Icon(Icons.radio),
+      label: 'Podcast',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.radio),
-      label: 'Podcasts',
+      icon: Icon(Icons.music_note),
+      label: 'Music',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.person),
@@ -275,7 +275,10 @@ Widget textfield(IconData i, String hnt, String lbl){
 
 Widget getPlayList(String playlistName, String playlistDesc){
   return Row(
+
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+
     children: [
       Icon(Icons.adjust, size: 50, color: Colors.blue[900],),
       Container(

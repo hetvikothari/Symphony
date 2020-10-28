@@ -30,6 +30,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void pushtonavigator(String routename) {
+    Navigator.of(context).pushNamed(routename);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

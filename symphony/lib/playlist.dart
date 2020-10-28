@@ -10,8 +10,8 @@ class MyPlaylist extends StatefulWidget{
 }
 
 class _MyPlaylistState extends State<MyPlaylist> {
-  int _selectedIndex = 0;
   double _currentSliderValue = 1;
+  String selectedPlaylist = "none";
  
 @override
   Widget build(BuildContext context) {
@@ -25,40 +25,77 @@ class _MyPlaylistState extends State<MyPlaylist> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
-              getHeading('My Playlists'),
+              Text(
+                'Playlist',
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontFamily: 'RockWell',
+                  fontSize: 45,
+                  color: Colors.black,
+                  letterSpacing: 3.0,
+                ),
+                textAlign: TextAlign.left,
+              ),
               SizedBox(height: 30,),
             Expanded(
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15),
                   getPlayList('Just Wanna Dance', 'Party Mood'),
                   SizedBox(height: 15),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15,),
                   getPlayList('Love is in the Air', 'Romantic ones'),
                   SizedBox(height: 15,),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15,),
                   getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
                   SizedBox(height: 15,),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15,),
                   getPlayList('Navratri Specials', 'Garba songs'),
                   SizedBox(height: 15,),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15),
                   getPlayList('Just Wanna Dance', 'Party Mood'),
                   SizedBox(height: 15),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
                   SizedBox(height: 15,),
                   getPlayList('Love is in the Air', 'Romantic ones'),
                   SizedBox(height: 15,),
-                  Divider(color: Colors.black),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
+                  SizedBox(height: 15,),
+                  getPlayList('Navratri Specials', 'Garba songs'),
+                  SizedBox(height: 15,),
+                  Divider(
+                      color: Colors.black
+                  ),
                 ],
               ),
             ),
+              Divider(color: Colors.black),
               SizedBox(height: 15,),
               getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg'),
             Slider(
@@ -80,3 +117,63 @@ class _MyPlaylistState extends State<MyPlaylist> {
     );
   }
 }
+
+Widget getPlaylist() {
+  return ( ListView(
+  scrollDirection: Axis.vertical,
+  children: [
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15),
+  getPlayList('Just Wanna Dance', 'Party Mood'),
+  SizedBox(height: 15),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Love is in the Air', 'Romantic ones'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Navratri Specials', 'Garba songs'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15),
+  getPlayList('Just Wanna Dance', 'Party Mood'),
+  SizedBox(height: 15),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Love is in the Air', 'Romantic ones'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Tute Dil ki Dastaan ', 'Sad wibes'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  SizedBox(height: 15,),
+  getPlayList('Navratri Specials', 'Garba songs'),
+  SizedBox(height: 15,),
+  Divider(
+  color: Colors.black
+  ),
+  ],
+  ));
+}
+

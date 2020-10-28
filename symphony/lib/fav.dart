@@ -38,7 +38,7 @@ class _MyFavState extends State<MyFav> {
           ),
         ),
       ),
-    );;
+    );
   }
 }
 
