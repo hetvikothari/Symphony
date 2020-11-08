@@ -28,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
                         style: TextStyle(fontSize: 120.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(16.0, 100.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(16.0, 10.0, 0.0, 0.0),
                     child: Text('There.',
                         style: TextStyle(fontSize: 63.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),

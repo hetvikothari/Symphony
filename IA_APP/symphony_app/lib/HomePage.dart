@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'utilities.dart';
+import 'nowplaying.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -86,13 +87,145 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
 
-Widget getARTISTlayout(){
-  return Flexible(
+  Widget getMOODlayout(){
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                SizedBox(width:20),
+                getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
+                SizedBox(width:20),
+                getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                SizedBox(width:20),
+                getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
+              ],
+            ),
+          ),
+          SizedBox(height:30),
+          getHeading('Most Played'),
+          SizedBox(height:10,),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: [
+                Divider(color: Colors.black),
+                SizedBox(height: 15),
+                GestureDetector(
+                    child: getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Tum ho',
+                        imglocation:'assets/rockstar.jpg',
+                        detail:'Rockstar / 4:03 '),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Maahi Ve',
+                        imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'All of me ',
+                        imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Roobaroo',
+                        imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+                Divider(color: Colors.black),
+                SizedBox(height: 15),
+                GestureDetector(
+                    child: getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Tum ho',
+                        imglocation:'assets/rockstar.jpg',
+                        detail:'Rockstar / 4:03 '),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Maahi Ve',
+                        imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'All of me ',
+                        imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+                Divider(color: Colors.black),
+                SizedBox(height: 15,),
+                GestureDetector(
+                    child: getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Roobaroo',
+                        imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
+                    ),
+                    );
+
+                    }),
+                SizedBox(height: 15,),
+
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getARTISTlayout(){
+    return Flexible(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             Flexible(
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -105,117 +238,70 @@ Widget getARTISTlayout(){
                 ],
               ),
             ),
-          SizedBox(height:10),
-          getHeading('MOST PLAYED PLAYLISTS'),
-          SizedBox(height:20,),
-           Flexible(
-               child: ListView(
-                   scrollDirection: Axis.horizontal,
-                   children: [
-                     getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
-                     SizedBox(width:20),
-                     getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
-                     SizedBox(width:20),
-                     getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
-                     SizedBox(width:20),
-                     getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
-               ]
-            )
-         ),
-        ]
-      ),
-  );
-}
-
-Widget getPODCASTlayout(){
-  return Flexible(
-    child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          getHeading('TOP SHOWS'),
-          Flexible(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                getPosterWithoutText('assets/dream.jpg'),
-                SizedBox(width:20),
-                getPosterWithoutText('assets/purpose.png'),
-                SizedBox(width:20),
-                getPosterWithoutText('assets/dream.jpg'),
-                SizedBox(width:20),
-                getPosterWithoutText('assets/purpose.png'),
-              ],
+            SizedBox(height:10),
+            getHeading('MOST PLAYED PLAYLISTS'),
+            SizedBox(height:20,),
+            Flexible(
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+                      SizedBox(width:20),
+                      getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                      SizedBox(width:20),
+                      getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+                      SizedBox(width:20),
+                      getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                    ]
+                )
             ),
-          ),
-          SizedBox(height:20),
-          getHeading('STAY UPDATED'),
-          SizedBox(height:20,),
-          Flexible(
+          ]
+      ),
+    );
+  }
+
+  Widget getPODCASTlayout(){
+    return Flexible(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            getHeading('TOP SHOWS'),
+            Flexible(
               child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
-                    SizedBox(width:20),
-                    getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                    SizedBox(width:20),
-                    getPoster('assets/murder.jpg', 'MURDER MYSTERY', 18),
-                    SizedBox(width:20),
-                    getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                  ]
-              )
-          ),
-        ]
-    ),
-  );
+                scrollDirection: Axis.horizontal,
+                children: [
+                  getPosterWithoutText('assets/dream.jpg'),
+                  SizedBox(width:20),
+                  getPosterWithoutText('assets/purpose.png'),
+                  SizedBox(width:20),
+                  getPosterWithoutText('assets/dream.jpg'),
+                  SizedBox(width:20),
+                  getPosterWithoutText('assets/purpose.png'),
+                ],
+              ),
+            ),
+            SizedBox(height:20),
+            getHeading('STAY UPDATED'),
+            SizedBox(height:20,),
+            Flexible(
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
+                      SizedBox(width:20),
+                      getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                      SizedBox(width:20),
+                      getPoster('assets/murder.jpg', 'MURDER MYSTERY', 18),
+                      SizedBox(width:20),
+                      getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                    ]
+                )
+            ),
+          ]
+      ),
+    );
+  }
+
+
 }
 
-Widget getMOODlayout(){
-  return Expanded(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
-              SizedBox(width:20),
-              getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
-              SizedBox(width:20),
-              getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
-              SizedBox(width:20),
-              getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
-            ],
-          ),
-        ),
-        SizedBox(height:30),
-        getHeading('Most Played'),
-        SizedBox(height:10,),
-        Expanded(
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              Divider(color: Colors.black),
-              SizedBox(height: 15),
-              getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
-              SizedBox(height: 15),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-              SizedBox(height: 15,),
-              getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21', 'rangde.jpg'),
-              SizedBox(height: 15,),
-              Divider(color: Colors.black),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}

@@ -27,7 +27,7 @@ class _MyScreenState extends State<MyScreen> {
     MyHomePage(),
     MyPlaylist(),
     MyPodcast(),
-    NowPlaying(),
+    MyFav(),
     MyProfile(),
   ];
 

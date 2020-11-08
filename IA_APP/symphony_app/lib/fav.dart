@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'utilities.dart';
+import 'nowplaying.dart';
+
 
 class MyFav extends StatefulWidget {
   @override
@@ -34,6 +36,112 @@ class _MyFavState extends State<MyFav> {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30,),
+              Expanded(
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15),
+                    GestureDetector(
+                        child: getFavSong('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Tum ho',
+                            imglocation:'assets/rockstar.jpg',
+                            detail:'Rockstar / 4:03 '),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('Maahi Ve', 'Highway / 3:33','highway.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Maahi Ve',
+                            imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('All of me ', 'John Legend / 2:23', 'null.webp'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'All of me ',
+                            imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Roobaroo',
+                            imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15),
+                    GestureDetector(
+                        child: getFavSong('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Tum ho',
+                            imglocation:'assets/rockstar.jpg',
+                            detail:'Rockstar / 4:03 '),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('Maahi Ve', 'Highway / 3:33','highway.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Maahi Ve',
+                            imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('All of me ', 'John Legend / 2:23', 'null.webp'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'All of me ',
+                            imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+                    Divider(color: Colors.black),
+                    SizedBox(height: 15,),
+                    GestureDetector(
+                        child: getFavSong('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
+                        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                            songName:'Roobaroo',
+                            imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
+                        ),
+                        );
+
+                        }),
+                    SizedBox(height: 15,),
+
+                  ],
+                ),
+              ),
             ],
           ),
         ),

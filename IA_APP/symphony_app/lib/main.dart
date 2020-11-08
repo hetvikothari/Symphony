@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:symphony/nowplaying.dart';
 
 import 'login.dart';
 import 'signup.dart';
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignupPage(),
         '/homepage': (context) => MyScreen(),
+        '/nowplaying': (context) => NowPlaying(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
 
+
+
 Widget getPosterWithoutText(String imgPath){
   return Container(
     height: 205,
@@ -81,7 +83,59 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
           ],
         ),
       ),
-      LikeButton(onTap: onLikeButtonTapped),
+      LikeButton(
+        isLiked: false,
+        onTap: onLikeButtonTapped,
+      ),
+      Icon(Icons.more_vert,size: 40,),
+    ],
+  );
+}
+
+Widget getFavSong(String playlistName, String playlistDesc, String imgname){
+  String imagelocation = 'assets/' + imgname;
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Container(
+        width: 55.0,
+        height: 55.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:  AssetImage(imagelocation),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+      Container(
+        width: 200,
+        child: Column(
+          children: [
+            Text(
+              playlistName,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              playlistDesc,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Calibri',
+                fontSize: 15,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ),
+      LikeButton(
+        isLiked: true,
+        onTap: onLikeButtonTapped,
+      ),
       Icon(Icons.more_vert,size: 40,),
     ],
   );
@@ -99,8 +153,8 @@ Widget getNowPlaying(String playlistName, String playlistDesc, String imgname){
     children: [
       /*Icon(Icons.adjust, size: 50, color: Colors.blue[900],),*/
       Container(
-        width: 55.0,
-        height: 55.0,
+        width: 40.0,
+        height: 40.0,
         decoration: BoxDecoration(
           image: DecorationImage(
             image:  AssetImage(imagelocation),
@@ -273,7 +327,7 @@ Widget textfield(IconData i, String hnt, String lbl){
   );
 }
 
-Widget getPlayList(String playlistName, String playlistDesc){
+Widget GetPlaylist(String playlistName, String playlistDesc){
   return Row(
 
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -307,12 +361,7 @@ Widget getPlayList(String playlistName, String playlistDesc){
           ],
         ),
       ),
-      Align(
-        alignment: Alignment.centerRight,
-        child: LikeButton(
-          onTap: onLikeButtonTapped,
-        ),
-      ),
+
       Align(
         alignment: Alignment.centerRight,
         child: Icon(Icons.more_vert,size: 40,),
