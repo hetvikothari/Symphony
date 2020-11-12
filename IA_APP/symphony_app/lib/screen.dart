@@ -13,6 +13,7 @@ import 'podcast.dart';
 import 'profile.dart';
 import 'fav.dart';
 import 'nowplaying.dart';
+import 'selectedAlbum.dart';
 
 class MyScreen extends StatefulWidget {
   @override
@@ -22,7 +23,8 @@ class MyScreen extends StatefulWidget {
 class _MyScreenState extends State<MyScreen> {
 
   int _selectedIndex = 0;
-  final List<Widget> _children =
+
+   final List<Widget> _children =
   [
     MyHomePage(),
     MyPlaylist(),

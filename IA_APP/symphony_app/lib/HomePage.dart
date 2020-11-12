@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 
 import 'utilities.dart';
 import 'nowplaying.dart';
+import 'selectedAlbum.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -12,7 +13,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _activetab = 'MOODS';
-  bool heart = false;
+  static bool album = false;
+  static var selectedAlbum = "none";
+  static String selectedAlbumDesc = "none";
+
+  void callback() {
+    setState(() {
+      album = false;
+    });
+  }
+
+  void pushtonavigator(String routename) {
+    Navigator.of(context).pushNamed(routename);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+      child: (album==true? AlbumSongs(pname:selectedAlbum , pdesc: selectedAlbumDesc, callback: callback,) : getHome())
+    ));
+  }
 
 
   Widget getTextWid(String txt){
@@ -31,16 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void pushtonavigator(String routename) {
-    Navigator.of(context).pushNamed(routename);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Container(
+  Widget getHome(){
+    return Container(
           margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,31 +77,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
-                      child: getTextWid('MOODS'),
-                      onTap:(){
-                        setState(() { _activetab = 'MOODS';});
-                      }),
+                        child: getTextWid('MOODS'),
+                        onTap:(){
+                          setState(() { _activetab = 'MOODS';});
+                        }),
                     GestureDetector(
                       child: getTextWid('ARTISTS'),
                       onTap:(){
                         setState(() { _activetab = 'ARTISTS';});
                       },),
                     GestureDetector(
-                      child: getTextWid('PODCASTS'),
-                      onTap:(){
-                        setState(() { _activetab = 'PODCASTS';});
-                      }),
+                        child: getTextWid('PODCASTS'),
+                        onTap:(){
+                          setState(() { _activetab = 'PODCASTS';});
+                        }),
                   ]
               ),
               SizedBox(height: 30,),
               _activetab == 'MOODS' ? getMOODlayout() : (_activetab == 'ARTISTS' ? getARTISTlayout() : getPODCASTlayout())
             ],
           ),
-        ),
-      ),
     );
   }
-
   Widget getMOODlayout(){
     return Expanded(
       child: Column(
@@ -97,13 +108,45 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                GestureDetector(
+                    child: getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Kar gayi Chull',
+                        imglocation:'assets/kas.jpg',detail:'Kapoor and sons / 3:21'),
+                    ),
+                    );
+
+                    }),
                 SizedBox(width:20),
-                getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
+                GestureDetector(
+                    child: getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Matargashti',
+                        imglocation:'assets/tamasha.jpg',detail:'Tamasha / 5:41'),
+                    ),
+                    );
+
+                    }),
                 SizedBox(width:20),
-                getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                GestureDetector(
+                    child: getPoster('assets/rangde.jpg', 'Roobaroo', 18),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Roobaroo',
+                        imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
+                    ),
+                    );
+
+                    }),
                 SizedBox(width:20),
-                getPoster('assets/tamasha.jpg', 'MATARGASHTI', 18),
+                GestureDetector(
+                    child: getPoster('assets/kas.jpg', 'KAR GAYI CHULL', 18),
+                    onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                        songName:'Kar gayi Chull',
+                        imglocation:'assets/kas.jpg',detail:'Kapoor and sons / 3:21'),
+                    ),
+                    );
+
+                    }),
               ],
             ),
           ),
@@ -230,11 +273,23 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  getArtistPoster('assets/shaan.jpg', 'Shaan'),
+                  GestureDetector(
+                      child: getArtistPoster('assets/sonu.jpg', 'Sonu Nigam'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Sonu Nigam'; selectedAlbumDesc = 'Artist'; album = true;});
+                      }),
                   SizedBox(width:20),
-                  getArtistPoster('assets/sonu.jpg', 'Sonu Nigam'),
+                  GestureDetector(
+                      child: getArtistPoster('assets/shaan.jpg', 'Shaan'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Shaan'; selectedAlbumDesc = 'Artist'; album = true;});
+                      }),
                   SizedBox(width:20),
-                  getArtistPoster('assets/shreya.jpg', 'Shreya Ghoshal'),
+                  GestureDetector(
+                      child: getArtistPoster('assets/shreya.jpg', 'Shreya Ghoshal'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Shreya Ghoshal'; selectedAlbumDesc = 'Artist'; album = true;});
+                      }),
                 ],
               ),
             ),
@@ -245,13 +300,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+
+                      GestureDetector(
+                          child: getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Kishore Kumar'; selectedAlbumDesc = 'KISHORE KUMAR TOP 50'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                      GestureDetector(
+                          child: getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Arijit Singh'; selectedAlbumDesc = 'BEST OF ARIJIT SINGH'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+                      GestureDetector(
+                          child: getPoster('assets/kishore.jpg', 'KISHORE KUMAR TOP 50', 15),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Kishore Kumar'; selectedAlbumDesc = 'KISHORE KUMAR TOP 50'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                      GestureDetector(
+                          child: getPoster('assets/arijit.webp', 'BEST OF ARIJIT SINGH', 15),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Arijit Singh'; selectedAlbumDesc = 'BEST OF ARIJIT SINGH'; album = true;});
+                          }),
+                      SizedBox(width:20),
+
                     ]
                 )
             ),
@@ -270,13 +344,32 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  getPosterWithoutText('assets/dream.jpg'),
+
+                  GestureDetector(
+                      child: getPosterWithoutText('assets/dream.jpg'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Dreams'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                      }),
                   SizedBox(width:20),
-                  getPosterWithoutText('assets/purpose.png'),
+                  GestureDetector(
+                      child: getPosterWithoutText('assets/purpose.png'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Purpose'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                      }),
                   SizedBox(width:20),
-                  getPosterWithoutText('assets/dream.jpg'),
+                  GestureDetector(
+                      child: getPosterWithoutText('assets/dream.jpg'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Dreams'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                      }),
                   SizedBox(width:20),
-                  getPosterWithoutText('assets/purpose.png'),
+                  GestureDetector(
+                      child: getPosterWithoutText('assets/purpose.png'),
+                      onTap:(){
+                        setState(() { selectedAlbum = 'Purpose'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                      }),
+                  SizedBox(width:20),
+
                 ],
               ),
             ),
@@ -287,13 +380,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
+                      GestureDetector(
+                          child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                      GestureDetector(
+                          child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/murder.jpg', 'MURDER MYSTERY', 18),
+                      GestureDetector(
+                          child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                          }),
                       SizedBox(width:20),
-                      getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                      GestureDetector(
+                          child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
+                          onTap:(){
+                            setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
+                          }),
+                      SizedBox(width:20),
                     ]
                 )
             ),

@@ -6,18 +6,24 @@ import 'package:marquee_widget/marquee_widget.dart';
 
 import 'utilities.dart';
 import 'nowplaying.dart';
+import 'SelectedPlayList.dart';
 
 class MyPlaylist extends StatefulWidget{
+
   @override
   _MyPlaylistState createState() => _MyPlaylistState();
 }
 
 class _MyPlaylistState extends State<MyPlaylist> {
   double _currentSliderValue = 1;
-  String selectedPlaylist = "none";
-  String selectedPlaylistDesc = "none";
+  static var selectedPlaylist = "none";
+  static String selectedPlaylistDesc = "none";
 
-
+  void callback() {
+    setState(() {
+      selectedPlaylist = "none";
+    });
+  }
 
 @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class _MyPlaylistState extends State<MyPlaylist> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
-              selectedPlaylist == "none"? getAllPlaylists() : CurrentPlaylist(selectedPlaylist, selectedPlaylistDesc),
+              selectedPlaylist == "none"? getAllPlaylists() : CustomPlaylist(pname:selectedPlaylist,pdesc:selectedPlaylistDesc,callback: callback),
 
               SizedBox(height: 20,),
               GestureDetector(
