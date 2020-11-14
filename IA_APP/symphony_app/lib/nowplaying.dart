@@ -15,8 +15,7 @@ class NowPlaying extends StatefulWidget {
     this.detail,
   });
 
-
-
+  @override
   @override
   _NowPlayingState createState() => _NowPlayingState();
 }

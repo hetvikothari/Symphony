@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'utilities.dart';
-import 'selectedAlbum.dart';
+import 'db_objects.dart';
+import 'nowplaying.dart';
 
 
 class MyPodcast extends StatefulWidget {
@@ -13,27 +14,12 @@ class MyPodcast extends StatefulWidget {
 
 class _MyPodcastState extends State<MyPodcast> {
 
-  static bool album = false;
-  static var selectedAlbum = "none";
-  static String selectedAlbumDesc = "none";
-
-  void callback() {
-    setState(() {
-      album = false;
-    });
-  }
-
-  void pushtonavigator(String routename) {
-    Navigator.of(context).pushNamed(routename);
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: (album==true? AlbumSongs(pname:selectedAlbum , pdesc: selectedAlbumDesc, callback: callback,) : getPodcastList())
+        child: getPodcastList()
       )
     );
   }
@@ -47,82 +33,70 @@ class _MyPodcastState extends State<MyPodcast> {
         children: [
           getSearchBar('Search album, song..'),
           SizedBox(height: 30,),
-          Text(
-            'Podcasts',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontFamily: 'RockWell',
-              fontSize: 45,
-              color: Colors.black,
-              letterSpacing: 3.0,
-            ),
-            textAlign: TextAlign.left,
-          ),
+          getMainHeading('Podcasts'),
           SizedBox(height:20,),
           getHeading('Crime'),
+          SizedBox(height: 5,),
           Flexible(
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    GestureDetector(
-                        child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/murder.jpg', 'MURDER MYSTERY',18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Murder Mystery'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                  ]
-              )
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: crime_podcasts.length,
+                itemBuilder: (context, index){
+                  return Row(
+                      children: [
+                        GestureDetector(
+                            child: getPoster(crime_podcasts[index].imglocation, crime_podcasts[index].songName, 18),
+                            onTap:() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    NowPlaying(
+                                      songName: crime_podcasts[index].songName,
+                                      imglocation:crime_podcasts[index].imglocation,
+                                      detail: crime_podcasts[index].detail,
+                                    ),
+                                ),
+                              );
+                            }
+                        ),
+                        SizedBox(width: 15),
+                      ]
+                  );
+                }
+            ),
           ),
+          SizedBox(height: 5),
           getHeading('Science & Technology'),
+          SizedBox(height: 5),
           Flexible(
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    GestureDetector(
-                        child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                    SizedBox(width:20),
-                    GestureDetector(
-                        child: getPoster('assets/girl.jpg', 'GIRL IN SPACE', 18),
-                        onTap:(){
-                          setState(() { selectedAlbum = 'Girl in space'; selectedAlbumDesc = 'Podcasts'; album = true;});
-                        }),
-                  ]
-              )
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: sci_podcasts.length,
+                itemBuilder: (context, index){
+                  return Row(
+                      children:[
+                        GestureDetector(
+                            child: getPoster(sci_podcasts[index].imglocation, sci_podcasts[index].songName, 18),
+                            onTap:() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    NowPlaying(
+                                      songName: sci_podcasts[index].songName,
+                                      imglocation:sci_podcasts[index].imglocation,
+                                      detail: sci_podcasts[index].detail,
+                                    ),
+                                ),
+                              );
+                            }
+                        ),
+                        SizedBox( width: 15),
+                      ]
+                  );
+                }
+            ),
           ),
         ],
-
       ),
     );
   }

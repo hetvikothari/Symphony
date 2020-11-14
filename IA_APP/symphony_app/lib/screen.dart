@@ -1,19 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:symphony/nowplaying.dart';
 
 import 'HomePage.dart';
-import 'login.dart';
-import 'signup.dart';
 import 'playlist.dart';
 import 'utilities.dart';
 import 'podcast.dart';
 import 'profile.dart';
 import 'fav.dart';
-import 'nowplaying.dart';
-import 'selectedAlbum.dart';
 
 class MyScreen extends StatefulWidget {
   @override

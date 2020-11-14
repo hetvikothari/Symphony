@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
-
-
-
 Widget getPosterWithoutText(String imgPath){
   return Container(
     height: 205,
@@ -44,7 +41,7 @@ Widget getPoster(String imgPath, String songName, double sz){
 }
 
 Widget getPlayListItem(String playlistName, String playlistDesc, String imgname){
-  String imagelocation = 'assets/' + imgname;
+  String imagelocation = imgname;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -93,7 +90,7 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
 }
 
 Widget getFavSong(String playlistName, String playlistDesc, String imgname){
-  String imagelocation = 'assets/' + imgname;
+  String imagelocation = imgname;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -140,7 +137,6 @@ Widget getFavSong(String playlistName, String playlistDesc, String imgname){
     ],
   );
 }
-
 
 Future<bool> onLikeButtonTapped(bool isLiked) async{
   return !isLiked;
@@ -283,6 +279,20 @@ Text getHeading(String name){
       letterSpacing: 2.5,
       fontWeight: FontWeight.bold,
     ),
+  );
+}
+
+Text getMainHeading(String name){
+  return Text(
+    name,
+    style: TextStyle(
+      fontStyle: FontStyle.italic,
+      fontFamily: 'RockWell',
+      fontSize: 45,
+      color: Colors.black,
+      letterSpacing: 3.0,
+    ),
+    textAlign: TextAlign.left,
   );
 }
 

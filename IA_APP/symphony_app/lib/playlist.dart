@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:marquee_widget/marquee_widget.dart';
 
 import 'utilities.dart';
 import 'nowplaying.dart';
 import 'SelectedPlayList.dart';
+import 'db_objects.dart';
 
 class MyPlaylist extends StatefulWidget{
-
   @override
   _MyPlaylistState createState() => _MyPlaylistState();
 }
@@ -38,19 +36,18 @@ class _MyPlaylistState extends State<MyPlaylist> {
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
               selectedPlaylist == "none"? getAllPlaylists() : CustomPlaylist(pname:selectedPlaylist,pdesc:selectedPlaylistDesc,callback: callback),
-
               SizedBox(height: 20,),
               GestureDetector(
                   child: getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg'),
-                  onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
+                  onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
                       songName:'Perfect',
                       imglocation:'assets/perfect.jpeg',
                       detail:'Ed Sheeran'),
                   ),
                   );
-
-                  }),
-
+                }
+              ),
               Slider(
                 value: _currentSliderValue,
                 min: 0,
@@ -74,6 +71,7 @@ class _MyPlaylistState extends State<MyPlaylist> {
   {
     return Flexible(
         child:  Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               margin:  EdgeInsets.all(1.0),
@@ -83,108 +81,28 @@ class _MyPlaylistState extends State<MyPlaylist> {
                     bottom: BorderSide(width: 6.0, color: Colors.lightBlue.shade900),
                   ),
                 )*/
-              child: Text(
-                'My Playlists',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontFamily: 'RockWell',
-                  fontSize: 45,
-                  color: Colors.black,
-                  letterSpacing: 3.0,
-
-                ),
-                textAlign: TextAlign.left,
-
-              ),
-
+              child: getMainHeading('My Playlists')
             ),
+            SizedBox(height: 15),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-
-                  SizedBox(height: 15),
-                  GestureDetector(
-                      child: GetPlaylist('Just Wanna Dance','Party Mood'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Just Wanna Dance'; selectedPlaylistDesc = 'Party Mood';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Tute Dil ki dastan','Break up songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Tute Dil ki dastan'; selectedPlaylistDesc = 'Break up songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Relax and chillll','Serene songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Relax and chillll'; selectedPlaylistDesc = 'Serene songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Workout Rhythm','Inspirational songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Workout Rhythm'; selectedPlaylistDesc = 'Inspirational songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15),
-                  GestureDetector(
-                      child: GetPlaylist('Just Wanna Dance','Party Mood'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Just Wanna Dance'; selectedPlaylistDesc = 'Party Mood';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Tute Dil ki dastan','Break up songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Tute Dil ki dastan'; selectedPlaylistDesc = 'Break up songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Relax and chillll','Serene songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Relax and chillll'; selectedPlaylistDesc = 'Serene songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: GetPlaylist('Workout Rhythm','Inspirational songs'),
-                      onTap:(){
-                        setState(() { selectedPlaylist = 'Workout Rhythm'; selectedPlaylistDesc = 'Inspirational songs';});
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(
-                      color: Colors.black
-                  ),
-
-                ],
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: playlists.length,
+                  itemBuilder: (context, index){
+                    return Column(
+                        children: [
+                          GestureDetector(
+                              child: GetPlaylist(playlists[index].name, playlists[index].desc),
+                              onTap:(){
+                                setState(() { selectedPlaylist = playlists[index].name; selectedPlaylistDesc = playlists[index].desc;});
+                              }
+                          ),
+                          SizedBox(height: 15),
+                          Divider(color: Colors.black),
+                          SizedBox(height: 15,),
+                        ]
+                    );
+                  }
               ),
             ),
           ],
@@ -193,7 +111,7 @@ class _MyPlaylistState extends State<MyPlaylist> {
 
   }
 
-  Widget CurrentPlaylist( String pname, String pdesc)
+  Widget CurrentPlaylist(String pname, String pdesc)
   {
     return Flexible(
         child: Column(
@@ -210,14 +128,11 @@ class _MyPlaylistState extends State<MyPlaylist> {
                 children: [
                   Row(
                     children: [
-
                         GestureDetector(
                             child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.blue[900],),
                             onTap:(){
                               setState(() { selectedPlaylist = 'none'; selectedPlaylistDesc = 'none';});
                             }),
-
-
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
@@ -228,18 +143,11 @@ class _MyPlaylistState extends State<MyPlaylist> {
                             fontSize: 35,
                             color: Colors.black,
                             letterSpacing: 3.0,
-
                           ),
-
-
                         ),
                       ),
-
-
-
                     ],
                   ),
-
                   Text(
                     pdesc,
                     style: TextStyle(
@@ -248,120 +156,40 @@ class _MyPlaylistState extends State<MyPlaylist> {
                       fontSize: 20,
                       color: Colors.black,
                       letterSpacing: 4.0,
-
                     ),
                     textAlign: TextAlign.center,
-
                   ),
-
                 ],
               )
-
             ),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15),
-                  GestureDetector(
-                      child: getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                              songName:'Tum ho',
-                              imglocation:'assets/rockstar.jpg',
-                              detail:'Rockstar / 4:03 '),
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: songlist.length,
+                  itemBuilder: (context, index){
+                    return Column(
+                        children: [
+                          GestureDetector(
+                              child: getPlayListItem(songlist[index].songName, songlist[index].detail, songlist[index].imglocation),
+                              onTap:() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>
+                                      NowPlaying(
+                                        songName: songlist[index].songName,
+                                        imglocation:songlist[index].imglocation,
+                                        detail: songlist[index].detail,
+                                      ),
+                                  ),
+                                );
+                              }
                           ),
-                        );
-
-                      }),
-                  SizedBox(height: 15),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'Maahi Ve',
-                          imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'All of me ',
-                          imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'Roobaroo',
-                          imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15),
-                  GestureDetector(
-                      child: getPlayListItem('Tum ho', 'Rockstar / 4:03 ','rockstar.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'Tum ho',
-                          imglocation:'assets/rockstar.jpg',
-                          detail:'Rockstar / 4:03 '),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('Maahi Ve', 'Highway / 3:33','highway.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'Maahi Ve',
-                          imglocation:'assets/highway.jpg',detail:'Highway / 3:33'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('All of me ', 'John Legend / 2:23', 'null.webp'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'All of me ',
-                          imglocation:'assets/null.webp',detail:'John Legend / 2:23'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-                  Divider(color: Colors.black),
-                  SizedBox(height: 15,),
-                  GestureDetector(
-                      child: getPlayListItem('Roobaroo', 'Rang de Basanti / 3:21','rangde.jpg'),
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
-                          songName:'Roobaroo',
-                          imglocation:'assets/rangde.jpg',detail:'Rang de Basanti / 3:21'),
-                      ),
-                      );
-
-                      }),
-                  SizedBox(height: 15,),
-
-                ],
+                          SizedBox(height: 15),
+                          Divider(color: Colors.black),
+                          SizedBox(height: 15,),
+                        ]
+                    );
+                  }
               ),
             ),
           ],
