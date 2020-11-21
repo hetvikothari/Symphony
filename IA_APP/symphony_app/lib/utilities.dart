@@ -379,3 +379,45 @@ Widget GetPlaylist(String playlistName, String playlistDesc){
     ],
   );
 }
+
+Widget ProfileListItem(IconData icon, String text)
+{
+  return Container(
+    height: 55,
+    margin: EdgeInsets.symmetric(
+      horizontal: 10,
+    ).copyWith(
+      bottom: 20,
+    ),
+    padding: EdgeInsets.symmetric(
+      horizontal: 20,
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.black12
+    ),
+    child: Row(
+      children: <Widget>[
+        Icon(
+          icon,
+          size: 25,
+        ),
+        SizedBox(width: 15),
+        Text(
+          text,
+          style: TextStyle(
+              fontSize: 18,
+              fontFamily: 'Calibri',
+              fontWeight: FontWeight.w400,
+              color: Colors.black87
+          )
+        ),
+        Spacer(),
+          Icon(
+            Icons.keyboard_arrow_right,
+            size: 25,
+          ),
+      ],
+    ),
+  );
+}
