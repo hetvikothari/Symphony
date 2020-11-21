@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 import 'utilities.dart';
 
@@ -9,6 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  String email,pass;
+  bool s=false;
+  final _auth=FirebaseAuth.instance;
 
   void pushtonavigator(String routename) {
     Navigator.of(context).pushNamed(routename);
@@ -42,9 +48,43 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
-                      textfield(Icons.email, "Enter your Email", "Email"),
+                    TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.email),
+                    hintText: "Enter your Email",
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey
+                    ),
+                  ),
+                  onChanged: (value) {
+                    email=value;
+                  },
+
+                ),
                       SizedBox(height: 20.0),
-                      textfield(Icons.vpn_key_sharp, "Enter your Password", "Password"),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.vpn_key_sharp),
+                          hintText: "Enter your Password",
+                          labelText: "Password",
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey
+                          ),
+                        ),
+                        onChanged: (value) {
+                          pass=value;
+                        },
+
+                      ),
                       SizedBox(height: 5.0),
                       Container(
                         alignment: Alignment(1.0, 0.0),
@@ -58,7 +98,46 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       SizedBox(height: 40.0),
-                      roundbutton('LOGIN', Colors.white, Colors.indigo[900], Colors.indigoAccent, pushtonavigator, param: '/signup'),
+                      Container(
+                          height: 40.0,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.white,
+                            color: Colors.indigo[900],
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: ()
+                              async{
+                                setState(() {
+                                  s=true;
+                                });
+                                try {
+                                  final user = await _auth.signInWithEmailAndPassword(
+                                      email: email, password: pass);
+                                  if (user != null) {
+                                    Navigator.pushNamed(context, "/homepage");
+                                  }
+                                  setState(() {
+                                    s=false;
+                                  });
+                                }catch(e){
+                                  print(e);
+                                }
+                              }
+                              ,
+                              child: Center(
+                                child: Text(
+                                  'SIGN UP',
+                                  style: TextStyle(
+                                      color: Colors.indigoAccent,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat'),
+                                ),
+                              ),
+                            ),
+                          )
+                      ),
+
                       SizedBox(height: 20.0),
                     ],
                   )),
