@@ -33,10 +33,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: (){ pushtonavigator('/homepage'); },
-                      child: Text('Skip this', style: TextStyle(color: Colors.black, fontSize: 20, decoration: TextDecoration.underline,), textAlign: TextAlign.right,),
-                    ),
                     Container(
                       child: Text('Hi There.',
                           style: TextStyle(fontSize: 100.0, fontWeight: FontWeight.bold, color: Colors.black)),
@@ -50,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                     TextFormField(
                   keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     icon: Icon(Icons.email),
                     hintText: "Enter your Email",
@@ -58,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey
+                        color: Colors.black38
                     ),
                   ),
                   onChanged: (value) {
@@ -69,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 20.0),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           icon: Icon(Icons.vpn_key_sharp),
                           hintText: "Enter your Password",
@@ -77,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey
+                              color: Colors.black38
                           ),
                         ),
                         onChanged: (value) {
@@ -129,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text(
                                   'SIGN UP',
                                   style: TextStyle(
-                                      color: Colors.indigoAccent,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Montserrat'),
                                 ),

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 import 'utilities.dart';
+import 'login.dart';
 
 
 class MyProfile extends StatefulWidget {
@@ -12,12 +15,27 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
 
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  User firebaseUser = FirebaseAuth.instance.currentUser;
+
+
+  _signOut() async {
+    await _firebaseAuth.signOut();
+    Navigator.pushNamed(context, "/");
+  }
+
   void pushtonavigator(String routename) {
     Navigator.of(context).pushNamed(routename);
   }
 
   @override
   Widget build(BuildContext context) {
+    return firebaseUser!=null? getProfile() : LoginPage();
+  }
+
+  Widget getProfile()
+  {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -26,57 +44,57 @@ class _MyProfileState extends State<MyProfile> {
           child: Column(
             children: [
               getSearchBar('Search album, song..'),
-            Container(
-            height: 100,
-            width: 100,
-            margin: EdgeInsets.only(top: 30),
-            child:
-              Stack(
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/profile.jpg'),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 25,
-                      width: 25,
-                      decoration: BoxDecoration(
-                        color: Colors.blue[900],
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        heightFactor: 15,
-                        widthFactor: 15,
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 15,
+              Container(
+                height: 100,
+                width: 100,
+                margin: EdgeInsets.only(top: 30),
+                child:
+                Stack(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/profile.jpg'),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                          color: Colors.blue[900],
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ),),
+                        child: Center(
+                          heightFactor: 15,
+                          widthFactor: 15,
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                        ),
+                      ),),
 
-                ],
-              ),),
+                  ],
+                ),),
               SizedBox(height: 10),
               Text(
-                'Himali Saini',
+                firebaseUser.email,
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                     fontFamily: 'Calibri',
-                  color: Colors.black87
+                    color: Colors.black87
                 ),
               ),
               SizedBox(height: 5),
               Text(
-                  'himali@gmail.com',
+                  firebaseUser.email,
                   style: TextStyle(
-                    fontSize: 16,
+                      fontSize: 16,
                       fontFamily: 'Calibri',
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black87
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black87
                   )
               ),
               SizedBox(height: 10),
@@ -115,10 +133,16 @@ class _MyProfileState extends State<MyProfile> {
                 Icons.person_add_rounded,
                 'Invite a Friend',
               ),
-              ProfileListItem(
-                Icons.logout,
-                'Log out',
+              GestureDetector(
+                  child: ProfileListItem(
+                    Icons.logout,
+                    'Log out',
+                  ),
+                  onTap:(){
+                    _signOut();
+                  }
               ),
+
 
 
 
