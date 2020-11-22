@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                       SizedBox(height: 20.0),
                       TextFormField(
+                        obscureText: true,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           icon: Icon(Icons.vpn_key_sharp),

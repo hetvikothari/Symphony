@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class Song{
   String songName;
   String imglocation;
+  String songlocation;
   String detail;
 
   Song({
     Key key,
     this.songName,
     this.imglocation,
+    this.songlocation,
     this.detail,
   });
 }
