@@ -39,12 +39,14 @@ class _MyPlaylistState extends State<MyPlaylist> {
               selectedPlaylist == "none"? getAllPlaylists() : CustomPlaylist(pname:selectedPlaylist,pdesc:selectedPlaylistDesc,callback: callback, q: getAllSongs()),
               SizedBox(height: 20,),
               GestureDetector(
-                  child: getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg'),
+                  child: getNowPlaying('Perfect', '(Ed Sheeran)','perfect.jpeg','Perfect.mp3'),
                   onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => NowPlaying(
                         songName:'Perfect',
                         imglocation:'assets/perfect.jpeg',
-                        detail:'Ed Sheeran'),
+                        detail:'Ed Sheeran',
+                        songlocation: 'Perfect.mp3',),
+                        
                     ),
                     );
                   }

@@ -36,6 +36,8 @@ class _NowPlayingState extends State<NowPlaying> {
   Duration position=new Duration();
   Duration musicLength=new Duration();
 
+  
+
   Widget slider(){
     return Container(
       width: 300.0,
@@ -189,7 +191,16 @@ class _NowPlayingState extends State<NowPlaying> {
                     IconButton(
                       iconSize: 45.0,
                       color: Colors.black,
-                      onPressed: (){},
+                      onPressed: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) =>NowPlaying(
+                        songName:'Matargashti',
+                        imglocation:'assets/tamasha.jpg',
+                        detail:'Tamasha',
+                        songlocation: 'Matargashti_-_Tamasha_Song_(Bestwap.in).mp3',
+                        ),
+                        ),
+                         );
+                      },
                       icon: Icon(
                         Icons.skip_previous,
                       ),
@@ -200,7 +211,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       color: Colors.black,
                       onPressed: (){
                         if(!playing){
-                          cache.play("Behti-Hawa-Sa-Tha-Woh-Shaan,Shantanu-Moitra.mp3");
+                          cache.play("songs/${widget.songlocation}");
                           setState(() {
                             playbtn = Icons.pause;
                             playing = true;
@@ -222,7 +233,16 @@ class _NowPlayingState extends State<NowPlaying> {
                     IconButton(
                       iconSize: 45.0,
                       color: Colors.black,
-                      onPressed: (){},
+                      onPressed: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) =>NowPlaying(
+                        songName:'Maahi Ve',
+                        imglocation:'assets/highway.jpg',
+                        detail:'Highway',
+                        songlocation: 'Maahi-Ve-A.R.-Rahman.mp3',
+                        ),
+                        ),
+                         );
+                      },
                       icon: Icon(
                         Icons.skip_next,
                       ),

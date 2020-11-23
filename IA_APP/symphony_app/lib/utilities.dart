@@ -143,7 +143,7 @@ Future<bool> onLikeButtonTapped(bool isLiked) async{
   return !isLiked;
 }
 
-Widget getNowPlaying(String playlistName, String playlistDesc, String imgname){
+Widget getNowPlaying(String playlistName, String playlistDesc, String imgname,String songlocation){
   String imagelocation = 'assets/' + imgname;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
