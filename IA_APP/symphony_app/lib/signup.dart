@@ -29,7 +29,7 @@ class _SignupPageState extends State<SignupPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                    padding: EdgeInsets.fromLTRB(0, 0.0, 0.0, 0.0),
                     child: Text('Hi',
                         style: TextStyle(fontSize: 120.0, fontWeight: FontWeight.bold, color: Colors.black)),
                   ),
@@ -45,10 +45,6 @@ class _SignupPageState extends State<SignupPage> {
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Column(
                   children: <Widget>[
-                    textfield(Icons.person, 'Enter your first and last name', 'Name'),
-                    SizedBox(height: 20,),
-                    textfield(Icons.phone, 'Enter a phone number', 'Phone'),
-                    SizedBox(height: 20,),
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(

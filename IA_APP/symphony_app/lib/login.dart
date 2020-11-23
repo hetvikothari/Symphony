@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 
 import 'utilities.dart';
@@ -28,18 +29,36 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Container(
-                      child: Text('Hi There.',
-                          style: TextStyle(fontSize: 100.0, fontWeight: FontWeight.bold, color: Colors.black)),
+          Stack(
+          children: <Widget>[
+
+                    TextLiquidFill(
+                      text: '♪Symphony♪',
+                      waveColor: Colors.blue[900],
+                      boxBackgroundColor: Colors.white,
+                      textStyle: TextStyle(
+                        fontSize: 60.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ],
-                ),
+              Container(
+                margin: const EdgeInsets.only(left: 135.0,top: 170),
+                width: 400.0,
+                height: 50.0,
+                child:
+                  RotateAnimatedTextKit(
+                    text: ["Music", "Madness", "Masti"],
+                    repeatForever: true,
+                    textStyle: TextStyle(fontSize: 40.0, fontFamily: "DS",color: Colors.black38),
+                  ),
+
+
               ),
+              ]
+          ),
+
+
+
               Container(
                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
@@ -122,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                               ,
                               child: Center(
                                 child: Text(
-                                  'SIGN UP',
+                                  'SIGN IN',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
