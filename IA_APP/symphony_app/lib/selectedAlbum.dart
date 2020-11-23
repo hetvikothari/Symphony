@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:symphony/playlist.dart';
 
+import 'buildLists.dart';
 import 'utilities.dart';
 import 'nowplaying.dart';
 import 'db_objects.dart';
@@ -37,7 +39,7 @@ class _AlbumSongsState extends State<AlbumSongs> {
             children: [
               getSearchBar('Search album, song..'),
               SizedBox(height: 30,),
-              songs(),
+              PlayListItemsBuilder(),
               SizedBox(height: 20,),
               ]
           ),
@@ -99,20 +101,20 @@ class _AlbumSongsState extends State<AlbumSongs> {
             Flexible(
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: songlist.length,
+                  itemCount: favs.length,
                   itemBuilder: (context, index){
                     return Column(
                         children: [
                           GestureDetector(
-                              child: getPlayListItem(songlist[index].songName, songlist[index].detail, songlist[index].imglocation),
+                              child: getPlayListItem(favs[index].songName, favs[index].detail, favs[index].imglocation),
                               onTap:() {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) =>
                                       NowPlaying(
-                                        songName: songlist[index].songName,
-                                        imglocation:songlist[index].imglocation,
-                                        detail: songlist[index].detail,
+                                        songName: favs[index].songName,
+                                        imglocation:favs[index].imglocation,
+                                        detail: favs[index].detail,
                                       ),
                                   ),
                                 );

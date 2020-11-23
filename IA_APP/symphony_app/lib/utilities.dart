@@ -46,8 +46,8 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Container(
-              width: 55.0,
-              height: 55.0,
+              width: 40.0,
+              height: 40.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image:  AssetImage(imagelocation),
@@ -56,7 +56,7 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
               ),
             ),
       Container(
-        width: 200,
+        width: 250,
         child: Column(
           children: [
             Text(
@@ -64,8 +64,9 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'Calibri',
-                fontSize: 25,
+                fontSize: 21,
               ),
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
             ),
             Text(
@@ -84,7 +85,7 @@ Widget getPlayListItem(String playlistName, String playlistDesc, String imgname)
         isLiked: false,
         onTap: onLikeButtonTapped,
       ),
-      Icon(Icons.more_vert,size: 40,),
+      Icon(Icons.more_vert,size: 30,),
     ],
   );
 }

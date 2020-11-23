@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-
-import 'utilities.dart';
-import 'nowplaying.dart';
-import 'db_objects.dart';
+import 'package:symphony/buildLists.dart';
 
 class CustomPlaylist extends StatefulWidget {
+
+  @required dynamic q;
 
   final String pname;
   final String pdesc;
   final Function callback;
 
-  const CustomPlaylist({
+  CustomPlaylist({
     Key key,
     this.pname,
     this.pdesc,
     this.callback,
+    this.q
   });
 
   @override
@@ -24,7 +24,6 @@ class CustomPlaylist extends StatefulWidget {
 }
 
 class _CustomPlaylistState extends State<CustomPlaylist> {
-
 
   Future<bool> onLikeButtonTapped(bool isLiked) async{
     return !isLiked;
@@ -83,36 +82,7 @@ class _CustomPlaylistState extends State<CustomPlaylist> {
                 )
             ),
             SizedBox(height: 20,),
-            Flexible(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: songlist.length,
-                  itemBuilder: (context, index){
-                    return Column(
-                        children: [
-                          GestureDetector(
-                              child: getPlayListItem(songlist[index].songName, songlist[index].detail, songlist[index].imglocation),
-                              onTap:() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>
-                                      NowPlaying(
-                                        songName: songlist[index].songName,
-                                        imglocation:songlist[index].imglocation,
-                                        detail: songlist[index].detail,
-                                      ),
-                                  ),
-                                );
-                              }
-                          ),
-                          SizedBox(height: 15),
-                          Divider(color: Colors.black),
-                          SizedBox(height: 15,),
-                        ]
-                    );
-                  }
-              ),
-            ),
+            PlayListItemsBuilder(query: widget.q),
           ],
         )
     );
