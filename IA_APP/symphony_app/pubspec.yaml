@@ -90,6 +90,10 @@ flutter:
     - family: Nirmala
       fonts:
         - asset: fonts/nirmala.ttf
+
+    - family: DS
+      fonts:
+        - asset: fonts/DS.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
