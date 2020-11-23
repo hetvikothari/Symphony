@@ -83,14 +83,16 @@ class _NowPlayingState extends State<NowPlaying> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                Colors.blue[800],
-                Colors.blue[200],
-              ])),
+          // decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //         begin: Alignment.topLeft,
+          //         end: Alignment.bottomRight,
+          //         colors: [
+          //           Colors.blue[800],
+          //           Colors.blue[200],
+          //         ],
+          //     )
+          // ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
