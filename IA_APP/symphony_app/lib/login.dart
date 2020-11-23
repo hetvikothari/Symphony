@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-
-import 'utilities.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  String email,pass;
-  bool s=false;
-  final _auth=FirebaseAuth.instance;
+  String email, pass;
+  bool s = false;
+  final _auth = FirebaseAuth.instance;
 
   void pushtonavigator(String routename) {
     Navigator.of(context).pushNamed(routename);
@@ -29,57 +25,49 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-          Stack(
-          children: <Widget>[
-
-                    TextLiquidFill(
-                      text: '♪Symphony♪',
-                      waveColor: Colors.blue[900],
-                      boxBackgroundColor: Colors.white,
-                      textStyle: TextStyle(
-                        fontSize: 60.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-              Container(
-                margin: const EdgeInsets.only(left: 135.0,top: 170),
-                width: 400.0,
-                height: 50.0,
-                child:
-                  RotateAnimatedTextKit(
+              Stack(children: <Widget>[
+                TextLiquidFill(
+                  text: '♪Symphony♪',
+                  waveColor: Colors.blue[900],
+                  boxBackgroundColor: Colors.white,
+                  textStyle: TextStyle(
+                    fontSize: 60.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 135.0, top: 170),
+                  width: 400.0,
+                  height: 50.0,
+                  child: RotateAnimatedTextKit(
                     text: ["Music", "Madness", "Masti"],
                     repeatForever: true,
-                    textStyle: TextStyle(fontSize: 40.0, fontFamily: "DS",color: Colors.black38),
+                    textStyle: TextStyle(
+                        fontSize: 40.0,
+                        fontFamily: "DS",
+                        color: Colors.black38),
                   ),
-
-
-              ),
-              ]
-          ),
-
-
-
+                ),
+              ]),
               Container(
                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
-                    TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.email),
-                    hintText: "Enter your Email",
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black38
-                    ),
-                  ),
-                  onChanged: (value) {
-                    email=value;
-                  },
-
-                ),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.email),
+                          hintText: "Enter your Email",
+                          labelText: "Email",
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black38),
+                        ),
+                        onChanged: (value) {
+                          email = value;
+                        },
+                      ),
                       SizedBox(height: 20.0),
                       TextFormField(
                         obscureText: true,
@@ -91,23 +79,25 @@ class _LoginPageState extends State<LoginPage> {
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
-                              color: Colors.black38
-                          ),
+                              color: Colors.black38),
                         ),
                         onChanged: (value) {
-                          pass=value;
+                          pass = value;
                         },
-
                       ),
                       SizedBox(height: 5.0),
                       Container(
                         alignment: Alignment(1.0, 0.0),
                         padding: EdgeInsets.only(top: 15.0, left: 20.0),
                         child: GestureDetector(
-                          onTap: (){},
+                          onTap: () {},
                           child: Text(
                             'Forgot Password',
-                            style: TextStyle(color: Colors.indigo[900], fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline),
+                            style: TextStyle(
+                                color: Colors.indigo[900],
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat',
+                                decoration: TextDecoration.underline),
                           ),
                         ),
                       ),
@@ -120,25 +110,24 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.indigo[900],
                             elevation: 7.0,
                             child: GestureDetector(
-                              onTap: ()
-                              async{
+                              onTap: () async {
                                 setState(() {
-                                  s=true;
+                                  s = true;
                                 });
                                 try {
-                                  final user = await _auth.signInWithEmailAndPassword(
-                                      email: email, password: pass);
+                                  final user =
+                                      await _auth.signInWithEmailAndPassword(
+                                          email: email, password: pass);
                                   if (user != null) {
                                     Navigator.pushNamed(context, "/homepage");
                                   }
                                   setState(() {
-                                    s=false;
+                                    s = false;
                                   });
-                                }catch(e){
+                                } catch (e) {
                                   print(e);
                                 }
-                              }
-                              ,
+                              },
                               child: Center(
                                 child: Text(
                                   'SIGN IN',
@@ -149,9 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                          )
-                      ),
-
+                          )),
                       SizedBox(height: 20.0),
                     ],
                   )),
@@ -161,7 +148,8 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Text(
                     'New to Symphony ?',
-                    style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
+                    style: TextStyle(
+                        fontFamily: 'Montserrat', color: Colors.black),
                   ),
                   SizedBox(width: 5.0),
                   GestureDetector(
@@ -170,7 +158,11 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Register',
-                      style: TextStyle(color: Colors.indigo[900], fontFamily: 'Montserrat', fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+                      style: TextStyle(
+                          color: Colors.indigo[900],
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
                     ),
                   )
                 ],

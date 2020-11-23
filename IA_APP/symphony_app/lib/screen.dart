@@ -14,11 +14,9 @@ class MyScreen extends StatefulWidget {
 }
 
 class _MyScreenState extends State<MyScreen> {
-
   int _selectedIndex = 0;
 
-   final List<Widget> _children =
-  [
+  final List<Widget> _children = [
     MyHomePage(),
     MyPlaylist(),
     MyPodcast(),
@@ -49,9 +47,3 @@ class _MyScreenState extends State<MyScreen> {
     );
   }
 }
-
-
-
-
-
-

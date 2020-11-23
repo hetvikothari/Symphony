@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 import 'utilities.dart';
 import 'login.dart';
-
 
 class MyProfile extends StatefulWidget {
   @override
@@ -14,13 +12,11 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   User firebaseUser = FirebaseAuth.instance.currentUser;
   var activetab = 'none';
   IconData i;
-
 
   _signOut() async {
     await _firebaseAuth.signOut();
@@ -31,14 +27,12 @@ class _MyProfileState extends State<MyProfile> {
     Navigator.of(context).pushNamed(routename);
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return firebaseUser!=null? getProfile() : LoginPage();
+    return firebaseUser != null ? getProfile() : LoginPage();
   }
 
-  Widget getProfile()
-  {
+  Widget getProfile() {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -51,8 +45,7 @@ class _MyProfileState extends State<MyProfile> {
                 height: 100,
                 width: 100,
                 margin: EdgeInsets.only(top: 30),
-                child:
-                Stack(
+                child: Stack(
                   children: <Widget>[
                     CircleAvatar(
                       radius: 50,
@@ -76,10 +69,11 @@ class _MyProfileState extends State<MyProfile> {
                             size: 15,
                           ),
                         ),
-                      ),),
-
+                      ),
+                    ),
                   ],
-                ),),
+                ),
+              ),
               SizedBox(height: 10),
               Text(
                 firebaseUser.email,
@@ -87,19 +81,15 @@ class _MyProfileState extends State<MyProfile> {
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Calibri',
-                    color: Colors.black87
-                ),
+                    color: Colors.black87),
               ),
               SizedBox(height: 5),
-              Text(
-                  'Symphony User',
+              Text('Symphony User',
                   style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Calibri',
                       fontWeight: FontWeight.w400,
-                      color: Colors.black87
-                  )
-              ),
+                      color: Colors.black87)),
               SizedBox(height: 10),
               Container(
                 height: 40,
@@ -119,11 +109,7 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                 ),
               ),
-
-              activetab == 'none'? getItemList() : getItem(activetab , i),
-
-
-
+              activetab == 'none' ? getItemList() : getItem(activetab, i),
             ],
           ),
         ),
@@ -131,9 +117,8 @@ class _MyProfileState extends State<MyProfile> {
     );
   }
 
-  Widget getItemList()
-  {
-    return  Container(
+  Widget getItemList() {
+    return Container(
       child: Column(
         children: <Widget>[
           SizedBox(height: 30),
@@ -142,28 +127,34 @@ class _MyProfileState extends State<MyProfile> {
                 Icons.privacy_tip_outlined,
                 'Privacy',
               ),
-              onTap:(){
-                setState(() { activetab = 'Privacy'; i = Icons.privacy_tip_outlined; });
-              }
-          ),
+              onTap: () {
+                setState(() {
+                  activetab = 'Privacy';
+                  i = Icons.privacy_tip_outlined;
+                });
+              }),
           GestureDetector(
               child: ProfileListItem(
                 Icons.settings,
                 'Settings',
               ),
-              onTap:(){
-                setState(() { activetab = 'Settings'; i= Icons.settings;});
-              }
-          ),
+              onTap: () {
+                setState(() {
+                  activetab = 'Settings';
+                  i = Icons.settings;
+                });
+              }),
           GestureDetector(
               child: ProfileListItem(
                 Icons.help_outline,
                 'Help & Support',
               ),
-              onTap:(){
-                setState(() { activetab = 'Help & Support'; i=Icons.help_outline; });
-              }
-          ),
+              onTap: () {
+                setState(() {
+                  activetab = 'Help & Support';
+                  i = Icons.help_outline;
+                });
+              }),
           ProfileListItem(
             Icons.person_add_rounded,
             'Invite a Friend',
@@ -173,66 +164,64 @@ class _MyProfileState extends State<MyProfile> {
                 Icons.logout,
                 'Log out',
               ),
-              onTap:(){
+              onTap: () {
                 _signOut();
-              }
-          ),
+              }),
         ],
       ),
     );
-
   }
 
-  Widget getItem(String name , IconData i)
-  {
+  Widget getItem(String name, IconData i) {
     return Container(
       height: 380,
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 20
-      ).copyWith(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20).copyWith(
         bottom: 20,
       ),
       padding: EdgeInsets.symmetric(
         horizontal: 20,
       ),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.black12
-      ),
-      child:
-      Column(
+          borderRadius: BorderRadius.circular(30), color: Colors.black12),
+      child: Column(
         children: <Widget>[
           SizedBox(height: 10),
-          Row(
-              children: <Widget>[
+          Row(children: <Widget>[
             GestureDetector(
-              child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.blue[900],),
-        onTap:(){
-          setState(() { activetab = 'none';});
-        }),
-                SizedBox(width: 75),
-                Icon(i, size: 30, color: Colors.blue[900],),
-                Text(
-                  activetab,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Calibri',
-                      color: Colors.black87
-                  ),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 30,
+                  color: Colors.blue[900],
                 ),
-
-   ]
-          ),
-          activetab == 'Privacy'? getPrivacy() : (activetab == 'Settings'? getSettings() : getHelp() )
+                onTap: () {
+                  setState(() {
+                    activetab = 'none';
+                  });
+                }),
+            SizedBox(width: 75),
+            Icon(
+              i,
+              size: 30,
+              color: Colors.blue[900],
+            ),
+            Text(
+              activetab,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Calibri',
+                  color: Colors.black87),
+            ),
+          ]),
+          activetab == 'Privacy'
+              ? getPrivacy()
+              : (activetab == 'Settings' ? getSettings() : getHelp())
         ],
       ),
     );
   }
 
-  Widget getPrivacy()
-  {
+  Widget getPrivacy() {
     return Container(
       child: ListView(
         scrollDirection: Axis.vertical,
@@ -240,43 +229,43 @@ class _MyProfileState extends State<MyProfile> {
         children: <Widget>[
           SizedBox(height: 10),
           ListTile(
-            title: Text('1. While using our Site we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.',
+            title: Text(
+              '1. While using our Site we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 10),
           ListTile(
-            title: Text('2. In addition, we may use third party services such as Google Analytics that collect monitor and analyze this ',
+            title: Text(
+              '2. In addition, we may use third party services such as Google Analytics that collect monitor and analyze this ',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 10),
           ListTile(
-            title: Text('3. Cookies are files with small amount of data which may include an anonymous unique identifier Cookies are sent to your browser from a web site and stored on your computers hard drive',
+            title: Text(
+              '3. Cookies are files with small amount of data which may include an anonymous unique identifier Cookies are sent to your browser from a web site and stored on your computers hard drive',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
-
-
         ],
       ),
     );
   }
 
-  Widget getSettings()
-  {
+  Widget getSettings() {
     return Container(
       child: ListView(
         scrollDirection: Axis.vertical,
@@ -284,43 +273,43 @@ class _MyProfileState extends State<MyProfile> {
         children: <Widget>[
           SizedBox(height: 10),
           ListTile(
-            title: Text('1. While using our Site we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.',
+            title: Text(
+              '1. While using our Site we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 10),
           ListTile(
-            title: Text('2. In addition, we may use third party services such as Google Analytics that collect monitor and analyze this ',
+            title: Text(
+              '2. In addition, we may use third party services such as Google Analytics that collect monitor and analyze this ',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 10),
           ListTile(
-            title: Text('3. Cookies are files with small amount of data which may include an anonymous unique identifier Cookies are sent to your browser from a web site and stored on your computers hard drive',
+            title: Text(
+              '3. Cookies are files with small amount of data which may include an anonymous unique identifier Cookies are sent to your browser from a web site and stored on your computers hard drive',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
-
-
         ],
       ),
     );
   }
 
-  Widget getHelp()
-  {
+  Widget getHelp() {
     return Container(
       child: ListView(
         scrollDirection: Axis.vertical,
@@ -328,42 +317,39 @@ class _MyProfileState extends State<MyProfile> {
         children: <Widget>[
           SizedBox(height: 25),
           ListTile(
-            title: Text('1. We at Symphony try our best to provide satisfying services. For any help or query please contact 012345678.',
+            title: Text(
+              '1. We at Symphony try our best to provide satisfying services. For any help or query please contact 012345678.',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 25),
           ListTile(
-            title: Text('2. To contact us via mail , feel free to use our mail services. Symphony@Symphony.com',
+            title: Text(
+              '2. To contact us via mail , feel free to use our mail services. Symphony@Symphony.com',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
           SizedBox(height: 25),
           ListTile(
-            title: Text('3. Everyone loves feedbacks. Please send your valuable feedbacks to feedback@symphony.com',
+            title: Text(
+              '3. Everyone loves feedbacks. Please send your valuable feedbacks to feedback@symphony.com',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Calibri',
-                  color: Colors.black87
-              ),),
+                  color: Colors.black87),
+            ),
           ),
-
-
         ],
       ),
     );
   }
 }
-
-
-
-

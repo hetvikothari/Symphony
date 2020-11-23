@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:symphony/buildLists.dart';
 
 import 'utilities.dart';
-import 'nowplaying.dart';
 import 'selectedAlbum.dart';
 import 'db_objects.dart';
 
@@ -27,42 +27,41 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
               ),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
+              ListTile(
+                title: Text('Item 1'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-        
         resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: (album == true
@@ -70,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     pname: selectedAlbum,
                     pdesc: selectedAlbumDesc,
                     callback: callback,
+                    query: getArtistItems(selectedAlbum),
                   )
                 : getHome())));
   }
@@ -148,66 +148,17 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: song_posters.length,
-                itemBuilder: (context, index) {
-                  return Row(children: [
-                    GestureDetector(
-                        child: getPoster(song_posters[index].imglocation,
-                            song_posters[index].songName, 18),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NowPlaying(
-                                songName: song_posters[index].songName,
-                                imglocation: song_posters[index].imglocation,
-                                detail: song_posters[index].detail,
-                              ),
-                            ),
-                          );
-                        }),
-                    SizedBox(width: 15),
-                  ]);
-                }),
+          PosterListBuilder(
+            query: getAllSongs(),
           ),
           SizedBox(height: 30),
           getHeading('Most Played'),
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: song_posters.length,
-                itemBuilder: (context, index) {
-                  return Column(children: [
-                    GestureDetector(
-                        child: getPlayListItem(
-                          song_posters[index].songName,
-                          song_posters[index].detail,
-                          song_posters[index].imglocation,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NowPlaying(
-                                songName: song_posters[index].songName,
-                                imglocation: song_posters[index].imglocation,
-                                detail: song_posters[index].detail,
-                              ),
-                            ),
-                          );
-                        }),
-                    SizedBox(height: 15),
-                    Divider(color: Colors.black),
-                    SizedBox(height: 15),
-                  ]);
-                }),
-          ),
+          PlayListItemsBuilder(
+            query: getAllSongs(),
+          )
         ],
       ),
     );
@@ -278,7 +229,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           most_played_playist_artist_name[index], 15),
                       onTap: () {
                         setState(() {
-                          selectedAlbum = most_played_playist_artist_name[index];
+                          selectedAlbum =
+                              most_played_playist_artist_name[index];
                           selectedAlbumDesc = most_played_playist_name[index];
                           album = true;
                         });
@@ -295,65 +247,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Flexible(
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         getHeading('TOP SHOWS'),
-        Flexible(
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: top_podcasts.length,
-              itemBuilder: (context, index) {
-                return Row(children: [
-                  GestureDetector(
-                      child:
-                          getPosterWithoutText(top_podcasts[index].imglocation),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NowPlaying(
-                              songName: top_podcasts[index].songName,
-                              imglocation: top_podcasts[index].imglocation,
-                              detail: top_podcasts[index].detail,
-                            ),
-                          ),
-                        );
-                      }),
-                  SizedBox(
-                    width: 15,
-                  ),
-                ]);
-              }),
+        PostersWithoutLabelBuilder(
+          query: getAllPodcasts(),
         ),
         SizedBox(height: 20),
         getHeading('STAY UPDATED'),
         SizedBox(
           height: 20,
         ),
-        Flexible(
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: latest_podcasts.length,
-              itemBuilder: (context, index) {
-                return Row(children: [
-                  GestureDetector(
-                      child: getPoster(latest_podcasts[index].imglocation,
-                          latest_podcasts[index].songName, 18),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NowPlaying(
-                              songName: latest_podcasts[index].songName,
-                              imglocation: latest_podcasts[index].imglocation,
-                              detail: latest_podcasts[index].detail,
-                            ),
-                          ),
-                        );
-                      }),
-                  SizedBox(
-                    width: 15,
-                  ),
-                ]);
-              }),
-        ),
+        PosterListBuilder(query: getAllPodcasts()),
       ]),
     );
   }
