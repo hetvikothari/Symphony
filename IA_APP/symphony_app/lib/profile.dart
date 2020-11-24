@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'utilities.dart';
 import 'login.dart';
@@ -17,6 +18,7 @@ class _MyProfileState extends State<MyProfile> {
   User firebaseUser = FirebaseAuth.instance.currentUser;
   var activetab = 'none';
   IconData i;
+  var email,pass;
 
   _signOut() async {
     await _firebaseAuth.signOut();
@@ -27,9 +29,12 @@ class _MyProfileState extends State<MyProfile> {
     Navigator.of(context).pushNamed(routename);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return firebaseUser != null ? getProfile() : LoginPage();
+
   }
 
   Widget getProfile() {
@@ -267,45 +272,80 @@ class _MyProfileState extends State<MyProfile> {
 
   Widget getSettings() {
     return Container(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+      child: Column(
         children: <Widget>[
-          SizedBox(height: 10),
-          ListTile(
-            title: Text(
-              '1. While using our Site we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you.',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Calibri',
-                  color: Colors.black87),
-            ),
-          ),
-          SizedBox(height: 10),
-          ListTile(
-            title: Text(
-              '2. In addition, we may use third party services such as Google Analytics that collect monitor and analyze this ',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Calibri',
-                  color: Colors.black87),
-            ),
-          ),
-          SizedBox(height: 10),
-          ListTile(
-            title: Text(
-              '3. Cookies are files with small amount of data which may include an anonymous unique identifier Cookies are sent to your browser from a web site and stored on your computers hard drive',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Calibri',
-                  color: Colors.black87),
-            ),
-          ),
+          SizedBox(height: 55),
+          GestureDetector(
+              child: Container(
+                height: 40,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.blue[900],
+                ),
+                child: Center(
+                  child: Text(
+                    'Update Email',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                _onAlertWithCustomContentPressed_email(context);
+              }),
+            SizedBox(height: 45),
+          GestureDetector(
+              child: Container(
+                height: 40,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.blue[900],
+                ),
+                child: Center(
+                  child: Text(
+                    'Update Password',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                _onAlertWithCustomContentPressed_password(context);
+              }),
+          SizedBox(height: 45),
+          GestureDetector(
+              child: Container(
+                height: 40,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.red[900],
+                ),
+                child: Center(
+                  child: Text(
+                    'Delete Account',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                _onAlertButtonsPressed(context);
+              }),
+
         ],
-      ),
+      )
     );
   }
 
@@ -351,5 +391,141 @@ class _MyProfileState extends State<MyProfile> {
         ],
       ),
     );
+
+
+  }
+  _onAlertButtonsPressed(context) {
+    Alert(
+      context: context,
+      title: "Delete Account",
+      desc: "Are you sure you want to delete your account?",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Delete",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () {
+            try{
+              firebaseUser.delete();
+              Navigator.pushNamed(context, "/");
+            }
+            catch(e)
+            {
+              print(e);
+            }
+          },
+          color: Colors.red,
+        ),
+        DialogButton(
+          child: Text(
+            "Cancel",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Colors.black38,
+        )
+      ],
+    ).show();
+  }
+
+  _onAlertWithCustomContentPressed_email(context) {
+    Alert(
+        context: context,
+        title: "Update Email",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.email),
+                labelText: 'Email',
+              ),
+              onChanged: (value) {
+                email = value;
+              },
+            ),
+
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: ()
+            {
+              try{
+                firebaseUser.updateEmail(email);
+              }
+              catch(e)
+              {
+                print(e);
+              }
+              Navigator.pop(context);
+              Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: new Text('Email has been updated!'),duration: const Duration(seconds: 3)));
+
+            }
+            ,
+            child: Text(
+              "Update",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+          DialogButton(
+            child: Text(
+              "Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            onPressed: () => Navigator.pop(context),
+            color: Colors.black38,
+          )
+        ]).show();
+  }
+
+  _onAlertWithCustomContentPressed_password(context) {
+    Alert(
+        context: context,
+        title: "Update Password",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                icon: Icon(Icons.lock),
+                labelText: 'Password',
+              ),
+              onChanged: (value) {
+                pass = value;
+              },
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () {
+              try{
+                firebaseUser.updatePassword(pass);
+              }
+              catch(e)
+              {
+                print(e);
+              }
+              Navigator.pop(context);
+              Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: new Text('Password has been updated!'),duration: const Duration(seconds: 3)));
+            },
+            child: Text(
+              "Update",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+          DialogButton(
+            child: Text(
+              "Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            onPressed: () => Navigator.pop(context),
+            color: Colors.black38,
+          )
+        ]).show();
   }
 }
+

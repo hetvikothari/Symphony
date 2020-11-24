@@ -39,6 +39,7 @@ dependencies:
   assets_audio_player: ^2.0.13
   http:
   firebase_database:
+  rflutter_alert: ^1.1.0
 
 
 dev_dependencies:
