@@ -45,7 +45,7 @@ class _MyPlaylistState extends State<MyPlaylist> {
                         songName:'Perfect',
                         imglocation:'assets/perfect.jpeg',
                         detail:'Ed Sheeran',
-                        songlocation: 'Perfect.mp3',),
+                        songlocation: 'Perfect',),
                         
                     ),
                     );

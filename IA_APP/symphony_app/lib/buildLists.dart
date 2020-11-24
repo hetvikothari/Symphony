@@ -28,6 +28,7 @@ class PostersWithoutLabelBuilder extends StatelessWidget {
                       songName: doc['name'],
                       imglocation: doc['image_location'],
                       detail: doc['description'],
+                      songlocation: doc['song_location'],
                     );
                     return PosterBuilder(w1, w2, doc);
                   });
@@ -59,6 +60,7 @@ class PosterListBuilder extends StatelessWidget {
                       songName: doc['name'],
                       imglocation: doc['image_location'],
                       detail: doc['description'],
+                      songlocation: doc['song_location'],
                     );
                     return PosterBuilder(w1, w2, doc);
                   });
@@ -90,6 +92,7 @@ class PlayListItemsBuilder extends StatelessWidget {
                       songName: doc['name'],
                       imglocation: doc['image_location'],
                       detail: doc['description'],
+                      songlocation: doc['song_location'],
                     );
                     return ItemBuilder(w1, w2, doc);
                   });

@@ -4,13 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:like_button/like_button.dart';
+import 'package:symphony/db_objects.dart';
 
 class NowPlaying extends StatefulWidget {
-  final String songName;
-  final String imglocation;
-  final String detail;
-  final String songlocation;
-  const NowPlaying({
+ String songName;
+ String imglocation;
+ String detail;
+ String songlocation;
+ NowPlaying({
     Key key,
     this.songName,
     this.imglocation,
@@ -18,7 +19,6 @@ class NowPlaying extends StatefulWidget {
     this.songlocation,
   });
 
-  @override
   @override
   _NowPlayingState createState() => _NowPlayingState();
 }
@@ -106,6 +106,11 @@ class _NowPlayingState extends State<NowPlaying> {
                       ),
                       onTap: () {
                         popfromnavigator(context);
+                         _player.pause();
+                          setState(() {
+                            playbtn = Icons.play_arrow;
+                            playing = false;
+                          });
                       }),
                   Spacer(),
                   Text(
@@ -161,10 +166,22 @@ class _NowPlayingState extends State<NowPlaying> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                            "${position.inMinutes}:${position.inSeconds.remainder(60)}"),
+                            "${position.inMinutes}:${position.inSeconds.remainder(60)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),),
+
                         slider(),
                         Text(
-                            "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}"),
+                            "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            
                         //   Text("1:20"),
                         //   Flexible(
                         //       flex:1,
@@ -196,10 +213,16 @@ class _NowPlayingState extends State<NowPlaying> {
                               imglocation: 'assets/tamasha.jpg',
                               detail: 'Tamasha',
                               songlocation:
-                                  'Matargashti_-_Tamasha_Song_(Bestwap.in).mp3',
+                                  'Matargashti_-_Tamasha_Song_(Bestwap.in)',
                             ),
                           ),
                         );
+                        // var obj = new NowPlaying();
+                        // obj.songName = 'Matargashti';
+                        // obj.imglocation = 'assets/tamasha.jpg';
+                        // obj.detail = 'Tamasha';
+                        // obj.songlocation = 'Matargashti_-_Tamasha_Song_(Bestwap.in)';
+
                       },
                       icon: Icon(
                         Icons.skip_previous,
@@ -213,7 +236,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       color: Colors.black,
                       onPressed: () {
                         if (!playing) {
-                          cache.play("songs/${widget.songlocation}");
+                          cache.play("songs/${widget.songlocation}.mp3");
                           setState(() {
                             playbtn = Icons.pause;
                             playing = true;
@@ -244,10 +267,15 @@ class _NowPlayingState extends State<NowPlaying> {
                               songName: 'Maahi Ve',
                               imglocation: 'assets/highway.jpg',
                               detail: 'Highway',
-                              songlocation: 'Maahi-Ve-A.R.-Rahman.mp3',
+                              songlocation: 'Maahi-Ve-A.R.-Rahman',
                             ),
                           ),
                         );
+                        // var obj = new NowPlaying();
+                        // obj.songName = 'Maahi Ve';
+                        // obj.imglocation = 'assets/highway.jpg';
+                        // obj.detail = 'Highway';
+                        // obj.songlocation = 'Maahi-Ve-A.R.-Rahman';                        
                       },
                       icon: Icon(
                         Icons.skip_next,
