@@ -4,6 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:symphony/utilities.dart';
 import 'nowplaying.dart';
 
+class UserPlaylistBuilder extends StatelessWidget {
+  @required
+  List songList;
+
+  UserPlaylistBuilder(this.songList);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: ListView.builder(
+            itemExtent: 80,
+            itemCount: songList.length,
+            itemBuilder: (context, index) {
+              dynamic doc = songList[index];
+              return Text(
+                doc.toString(),
+                style: TextStyle(color: Colors.black),
+              );
+              // Widget w1 = getPlayListItem(doc.name, doc['description'], doc['image_location']);
+              // Widget w2 = NowPlaying(
+              //   songName: doc['name'],
+              //   imglocation: doc['image_location'],
+              //   detail: doc['description'],
+              //   songlocation: doc['song_location'],
+              // );
+              // return ItemBuilder(w1, w2, doc);
+            }));
+  }
+}
+
 class PostersWithoutLabelBuilder extends StatelessWidget {
   @required
   Stream<QuerySnapshot> query;

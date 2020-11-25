@@ -6,11 +6,20 @@ import 'package:symphony/buildLists.dart';
 class CustomPlaylist extends StatefulWidget {
   @required
   dynamic q;
+  final String pid;
   final String pname;
   final String pdesc;
+  final List psongs;
   final Function callback;
 
-  CustomPlaylist({Key key, this.pname, this.pdesc, this.callback, this.q});
+  CustomPlaylist(
+      {Key key,
+      this.pid,
+      this.pname,
+      this.pdesc,
+      this.psongs,
+      this.callback,
+      this.q});
 
   @override
   _CustomPlaylistState createState() => _CustomPlaylistState();
@@ -78,7 +87,8 @@ class _CustomPlaylistState extends State<CustomPlaylist> {
         SizedBox(
           height: 20,
         ),
-        PlayListItemsBuilder(query: widget.q),
+        // PlayListItemsBuilder(query: widget.q),
+        UserPlaylistBuilder(widget.psongs),
       ],
     ));
   }
