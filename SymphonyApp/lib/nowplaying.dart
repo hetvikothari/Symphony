@@ -205,18 +205,40 @@ class _NowPlayingState extends State<NowPlaying> {
                       iconSize: 45.0,
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NowPlaying(
-                              songName: 'Matargashti',
-                              imglocation: 'assets/tamasha.jpg',
-                              detail: 'Tamasha',
-                              songlocation:
-                                  'Matargashti_-_Tamasha_Song_(Bestwap.in)',
-                            ),
-                          ),
-                        );
+                      _player.pause();
+                          setState(() {
+                    _player.durationHandler = (d) {
+                      setState(() {
+                        musicLength = d;
+
+                    });
+                        };
+                     _player.positionHandler = (p) {
+                    setState(() {
+                       position = p;
+                        });
+                          };                            
+                            playbtn = Icons.play_arrow;
+                            playing = false;                            
+                            playbtn = Icons.play_arrow;
+                            playing = false;
+                            widget.songName='Matargashti';
+                            widget.imglocation='assets/tamasha.jpg';
+                            widget.songlocation='Matargashti_-_Tamasha_Song_(Bestwap.in)';
+                            widget.detail='Tamasha';
+                          });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => NowPlaying(
+                        //       songName: 'Matargashti',
+                        //       imglocation: 'assets/tamasha.jpg',
+                        //       detail: 'Tamasha',
+                        //       songlocation:
+                        //           'Matargashti_-_Tamasha_Song_(Bestwap.in)',
+                        //     ),
+                        //   ),
+                        // );
                         // var obj = new NowPlaying();
                         // obj.songName = 'Matargashti';
                         // obj.imglocation = 'assets/tamasha.jpg';
@@ -260,17 +282,37 @@ class _NowPlayingState extends State<NowPlaying> {
                       iconSize: 45.0,
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NowPlaying(
-                              songName: 'Maahi Ve',
-                              imglocation: 'assets/highway.jpg',
-                              detail: 'Highway',
-                              songlocation: 'Maahi-Ve-A.R.-Rahman',
-                            ),
-                          ),
-                        );
+                      _player.pause();
+                          setState(() {
+                    _player.durationHandler = (d) {
+                      setState(() {
+                        musicLength = d;
+
+                    });
+                        };
+                     _player.positionHandler = (p) {
+                    setState(() {
+                       position = p;
+                        });
+                          };                            
+                            playbtn = Icons.play_arrow;
+                            playing = false;
+                            widget.songName='Maahi Ve';
+                            widget.imglocation='assets/highway.jpg';
+                            widget.songlocation='Maahi-Ve-A.R.-Rahman';
+                            widget.detail='Highway';
+                          });                        
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => NowPlaying(
+                        //       songName: 'Maahi Ve',
+                        //       imglocation: 'assets/highway.jpg',
+                        //       detail: 'Highway',
+                        //       songlocation: 'Maahi-Ve-A.R.-Rahman',
+                        //     ),
+                        //   ),
+                        // );
                         // var obj = new NowPlaying();
                         // obj.songName = 'Maahi Ve';
                         // obj.imglocation = 'assets/highway.jpg';
