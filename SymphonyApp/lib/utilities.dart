@@ -156,7 +156,9 @@ class _getPlayListItemState extends State<getPlayListItem> {
         ),
         LikeButton(
           isLiked: false,
-          onTap: onLikeButtonTapped,
+          onTap:(bool isLiked){ 
+            return onLikeButtonTapped(isLiked,widget.songId);
+            },
         ),
         GestureDetector(
           child: Icon(Icons.add, size: 30,),
@@ -210,14 +212,15 @@ Widget getFavSong(String playlistName, String playlistDesc, String imgname){
       ),
       LikeButton(
         isLiked: true,
-        onTap: onLikeButtonTapped,
+        // onTap: onLikeButtonTapped,
       ),
       Icon(Icons.more_vert,size: 40,),
     ],
   );
 }
 
-Future<bool> onLikeButtonTapped(bool isLiked) async{
+Future<bool> onLikeButtonTapped(bool isLiked,songid) async{
+  addSongToFavourite(songid,firebaseUser.email);
   return !isLiked;
 }
 

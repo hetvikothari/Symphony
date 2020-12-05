@@ -81,7 +81,16 @@ void addSongToPlaylist(String SongId, String playlistId){
   });
 }
 
-Stream<QuerySnapshot> GetUserPlaylists(UserEmail) {
+void addSongToFavourite(String SongId,String UserEmail){
+  Firestore.instance
+  .collection('songs')
+  .doc(SongId)
+  .updateData({
+    'favourite': FieldValue.arrayUnion([UserEmail])
+  });
+}
+
+Stream<QuerySnapshot> GetUserPlaylists(String UserEmail) {
   Stream<QuerySnapshot> query = Firestore.instance
       .collection('playlist')
       .where('UserEmail', isEqualTo: UserEmail)
@@ -94,5 +103,7 @@ Stream<QuerySnapshot> getfavSongs(UserEmail){
   .collection('songs')
   .where('favourite', arrayContains: UserEmail)
   .snapshots();
+  return query;
 print(query);
 }
+
