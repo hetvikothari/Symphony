@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'db.dart';
 
 Stream<QuerySnapshot> getAllSongs() {
   Stream<QuerySnapshot> query = Firestore.instance
@@ -88,19 +87,3 @@ Stream<QuerySnapshot> GetUserPlaylists(UserEmail) {
       .snapshots();
   print(query);
 }
-
-final playlist1 = Playlist('Just Wanna Dance', 'Party Mood');
-final playlist2 = Playlist('Tute Dil ki Dastan', 'Break up Songs');
-final playlist3 = Playlist('Relax and Chill', 'Serene Songs');
-final playlist4 = Playlist('Workout Rhythm', 'Inspirational Songs');
-
-final playlists = [
-  playlist1,
-  playlist2,
-  playlist3,
-  playlist4,
-  playlist1,
-  playlist2,
-  playlist3,
-  playlist4
-];
