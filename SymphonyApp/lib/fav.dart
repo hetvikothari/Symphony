@@ -5,6 +5,7 @@ import 'package:symphony/buildLists.dart';
 
 import 'utilities.dart';
 import 'db_objects.dart';
+import 'authuser.dart';
 
 class MyFav extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _MyFavState extends State<MyFav> {
                 height: 30,
               ),
               PlayListItemsBuilder(
-                query: getAllSongs(),
+                query: getfavSongs(firebaseUser.email),
               )
             ],
           ),

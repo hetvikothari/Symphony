@@ -25,6 +25,7 @@ Stream<QuerySnapshot> getAllPodcasts() {
   return query;
 }
 
+
 Stream<QuerySnapshot> getGenrePodcast(String genre) {
   Stream<QuerySnapshot> query = Firestore.instance
       .collection('songs')
@@ -86,4 +87,12 @@ Stream<QuerySnapshot> GetUserPlaylists(UserEmail) {
       .where('UserEmail', isEqualTo: UserEmail)
       .snapshots();
   print(query);
+}
+
+Stream<QuerySnapshot> getfavSongs(UserEmail){
+  Stream<QuerySnapshot> query = Firestore.instance
+  .collection('songs')
+  .where('favourite', arrayContains: UserEmail)
+  .snapshots();
+print(query);
 }
