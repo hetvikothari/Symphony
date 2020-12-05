@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:like_button/like_button.dart';
-import 'package:symphony/db_objects.dart';
 
 class NowPlaying extends StatefulWidget {
  String songName;

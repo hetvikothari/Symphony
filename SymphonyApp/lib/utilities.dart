@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'db_objects.dart';
+import 'authuser.dart';
 
 Widget getPosterWithoutText(String imgPath){
   return Container(
@@ -40,55 +44,129 @@ Widget getPoster(String imgPath, String songName, double sz){
   );
 }
 
-Widget getPlayListItem(String playlistName, String playlistDesc, String imgname){
-  String imagelocation = imgname;
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Container(
-              width: 40.0,
-              height: 40.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image:  AssetImage(imagelocation),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-      Container(
-        width: 250,
-        child: Column(
-          children: [
-            Text(
-              playlistName,
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Calibri',
-                fontSize: 21,
-              ),
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-            ),
-            Text(
-              playlistDesc,
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Calibri',
-                fontSize: 15,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-      ),
-      LikeButton(
-        isLiked: false,
-        onTap: onLikeButtonTapped,
-      ),
-      Icon(Icons.more_vert,size: 30,),
-    ],
-  );
+class getPlayListItem extends StatefulWidget {
+  String songName;
+  String songDesc;
+  String imagelocation;
+  String songId;
+
+  getPlayListItem({
+    Key key,
+    this.songName,
+    this.songDesc,
+    this.imagelocation,
+    this.songId
+  });
+
+  @override
+  _getPlayListItemState createState() => _getPlayListItemState();
 }
+
+class _getPlayListItemState extends State<getPlayListItem> {
+  _showDialog() async {
+    await showDialog<String>(
+      context: context,
+      child: new AlertDialog(
+        contentPadding: const EdgeInsets.all(16.0),
+        content: Text('Select Any Playlist', textAlign: TextAlign.center,),
+        // content: showPlaylists(getUserPlaylists(firebaseUser.email)),
+        actions: <Widget>[
+          showPlaylists(getUserPlaylists(firebaseUser.email))
+        ],
+      ),
+    );
+  }
+
+  Widget showPlaylists(query){
+    return Container(
+        height: 300,
+        width: 300,
+        child: StreamBuilder(
+                    stream: query,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return const Text('Loading...');
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                            DocumentSnapshot document = snapshot.data.documents[index];
+                            return Container(
+                              height: 50,
+                              width: 300,
+                              color: Colors.indigoAccent,
+                              margin: EdgeInsets.all(10),
+                              child: FlatButton(
+                                  child: Text(
+                                    document['name'],
+                                    style: TextStyle(color: Colors.white, fontSize: 15),
+                                  ),
+                                onPressed: (){
+                                    addSongToPlaylist(widget.songId, document.id);
+                                    Navigator.pop(context);
+                                },
+                              ),
+                            );
+                          });
+                    }
+                )
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 40.0,
+          height: 40.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:  AssetImage(widget.imagelocation),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        Container(
+          width: 250,
+          child: Column(
+            children: [
+              Text(
+                widget.songName,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Calibri',
+                  fontSize: 21,
+                ),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                widget.songDesc,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Calibri',
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ],
+          ),
+        ),
+        LikeButton(
+          isLiked: false,
+          onTap: onLikeButtonTapped,
+        ),
+        GestureDetector(
+          child: Icon(Icons.add, size: 30,),
+          onTap: _showDialog,
+        ),
+      ],
+    );
+  }
+}
+
 
 Widget getFavSong(String playlistName, String playlistDesc, String imgname){
   String imagelocation = imgname;

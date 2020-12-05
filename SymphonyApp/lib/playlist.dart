@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -9,6 +8,7 @@ import 'utilities.dart';
 import 'nowplaying.dart';
 import 'SelectedPlayList.dart';
 import 'db_objects.dart';
+import 'authuser.dart';
 
 class MyPlaylist extends StatefulWidget {
   @override
@@ -16,7 +16,6 @@ class MyPlaylist extends StatefulWidget {
 }
 
 class _MyPlaylistState extends State<MyPlaylist> {
-  User firebaseUser = FirebaseAuth.instance.currentUser;
   final nameController = TextEditingController();
   final descController = TextEditingController();
 
@@ -24,7 +23,6 @@ class _MyPlaylistState extends State<MyPlaylist> {
   static var selectedPlaylist = "none";
   static String selectedPlaylistId = "none";
   static String selectedPlaylistDesc = "none";
-  static List selectedPlaylistSongs = [];
   void callback() {
     setState(() {
       selectedPlaylist = "none";
@@ -36,19 +34,23 @@ class _MyPlaylistState extends State<MyPlaylist> {
       context: context,
       child: new AlertDialog(
         contentPadding: const EdgeInsets.all(16.0),
-        content: Column(children: [
-          TextField(
-            autofocus: true,
-            decoration: new InputDecoration(labelText: 'Enter Playlist Name'),
-            controller: nameController,
-          ),
-          TextField(
-            autofocus: true,
-            decoration:
-                new InputDecoration(labelText: 'Enter Playlist Description'),
-            controller: descController,
-          ),
-        ]),
+        content: Container(
+          height: 120,
+          child: Column(
+              children: [
+            TextField(
+              autofocus: true,
+              decoration: new InputDecoration(labelText: 'Enter Playlist Name'),
+              controller: nameController,
+            ),
+            TextField(
+              autofocus: true,
+              decoration:
+                  new InputDecoration(labelText: 'Enter Playlist Description'),
+              controller: descController,
+            ),
+          ]),
+        ),
         actions: <Widget>[
           new FlatButton(
               child: const Text('CREATE'),
@@ -99,9 +101,8 @@ class _MyPlaylistState extends State<MyPlaylist> {
                       pid: selectedPlaylistId,
                       pname: selectedPlaylist,
                       pdesc: selectedPlaylistDesc,
-                      psongs: selectedPlaylistSongs,
                       callback: callback,
-                      q: getUserPlaylistSongs(selectedPlaylistId)),
+                      q: getPlaylistSongs(selectedPlaylistId)),
               SizedBox(
                 height: 20,
               ),
@@ -169,8 +170,7 @@ class _MyPlaylistState extends State<MyPlaylist> {
                                 setState(() {
                                   selectedPlaylist = doc['name'];
                                   selectedPlaylistDesc = doc['description'];
-                                  selectedPlaylistSongs = doc['songs'];
-                                  selectedPlaylistId = doc['id'];
+                                  selectedPlaylistId = doc.id;
                                 });
                               }),
                           SizedBox(height: 15),

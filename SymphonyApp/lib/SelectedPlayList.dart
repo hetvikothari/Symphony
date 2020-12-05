@@ -9,7 +9,6 @@ class CustomPlaylist extends StatefulWidget {
   final String pid;
   final String pname;
   final String pdesc;
-  final List psongs;
   final Function callback;
 
   CustomPlaylist(
@@ -17,7 +16,6 @@ class CustomPlaylist extends StatefulWidget {
       this.pid,
       this.pname,
       this.pdesc,
-      this.psongs,
       this.callback,
       this.q});
 
@@ -38,11 +36,6 @@ class _CustomPlaylistState extends State<CustomPlaylist> {
         Container(
             margin: EdgeInsets.all(1.0),
             padding: EdgeInsets.all(1.0),
-            /*decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 6.0, color: Colors.lightBlue.shade900),
-                  ),
-                )*/
             child: Column(
               children: [
                 Row(
@@ -88,7 +81,7 @@ class _CustomPlaylistState extends State<CustomPlaylist> {
           height: 20,
         ),
         // PlayListItemsBuilder(query: widget.q),
-        UserPlaylistBuilder(widget.psongs),
+        PlayListItemsBuilder(query: widget.q),
       ],
     ));
   }
